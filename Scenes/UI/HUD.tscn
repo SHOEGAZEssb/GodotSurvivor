@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dss3lm7dhqm8c"]
+
+[ext_resource type="PackedScene" uid="uid://2yyuqlnniq23" path="res://Scenes/UI/HealthBar.tscn" id="1_s4uye"]
+[ext_resource type="PackedScene" uid="uid://c15rpjmpbumyi" path="res://Scenes/UI/ExpBar.tscn" id="2_iye46"]
+[ext_resource type="Script" path="res://Scenes/UI/ExpBar.cs" id="3_a4344"]
+
+[node name="HUD" type="MarginContainer"]
+offset_right = 1024.0
+offset_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="HealthBar" parent="VBoxContainer" instance=ExtResource("1_s4uye")]
+layout_mode = 2
+
+[node name="ExpBar" parent="VBoxContainer" instance=ExtResource("2_iye46")]
+layout_mode = 2
+script = ExtResource("3_a4344")

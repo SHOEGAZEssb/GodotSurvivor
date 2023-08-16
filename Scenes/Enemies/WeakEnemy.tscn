@@ -1,0 +1,126 @@
+[gd_scene load_steps=20 format=3 uid="uid://uteyh3x26id5"]
+
+[ext_resource type="PackedScene" uid="uid://3w1lhioh26q2" path="res://Scenes/Enemies/EnemyBase.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://3nlsnu2ysdth" path="res://Sprites/Enemies/DinoSprites - doux left.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bw17jjuqmjoai" path="res://Sprites/Enemies/DinoSprites - doux.png" id="3"]
+[ext_resource type="Script" path="res://Scenes/Enemies/WeakEnemy.cs" id="4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2r232"]
+radius = 5.5
+height = 17.0
+
+[sub_resource type="AtlasTexture" id="23"]
+atlas = ExtResource("2")
+region = Rect2(456, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="24"]
+atlas = ExtResource("2")
+region = Rect2(432, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="25"]
+atlas = ExtResource("2")
+region = Rect2(408, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="26"]
+atlas = ExtResource("2")
+region = Rect2(384, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="27"]
+atlas = ExtResource("2")
+region = Rect2(360, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="28"]
+atlas = ExtResource("2")
+region = Rect2(336, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="29"]
+atlas = ExtResource("3")
+region = Rect2(96, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="30"]
+atlas = ExtResource("3")
+region = Rect2(120, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="31"]
+atlas = ExtResource("3")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="32"]
+atlas = ExtResource("3")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="33"]
+atlas = ExtResource("3")
+region = Rect2(192, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="34"]
+atlas = ExtResource("3")
+region = Rect2(216, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="35"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("23")
+}, {
+"duration": 1.0,
+"texture": SubResource("24")
+}, {
+"duration": 1.0,
+"texture": SubResource("25")
+}, {
+"duration": 1.0,
+"texture": SubResource("26")
+}, {
+"duration": 1.0,
+"texture": SubResource("27")
+}, {
+"duration": 1.0,
+"texture": SubResource("28")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("29")
+}, {
+"duration": 1.0,
+"texture": SubResource("30")
+}, {
+"duration": 1.0,
+"texture": SubResource("31")
+}, {
+"duration": 1.0,
+"texture": SubResource("32")
+}, {
+"duration": 1.0,
+"texture": SubResource("33")
+}, {
+"duration": 1.0,
+"texture": SubResource("34")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_da43f"]
+radius = 6.0
+height = 18.0
+
+[node name="WeakEnemy" instance=ExtResource("1")]
+script = ExtResource("4")
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("CapsuleShape2D_2r232")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("35")
+animation = &"walk_right"
+frame = 5
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("CapsuleShape2D_da43f")

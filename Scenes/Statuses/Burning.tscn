@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdw1ihx7x8hk1"]
+
+[ext_resource type="Texture2D" uid="uid://c75t8xv1awc51" path="res://Sprites/Statuses/Fire.png" id="1_ie140"]
+[ext_resource type="Script" path="res://Scenes/Statuses/Burning.cs" id="1_lpfsx"]
+
+[sub_resource type="Gradient" id="Gradient_ubnq7"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.483444)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[node name="Burning" type="Node2D"]
+script = ExtResource("1_lpfsx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 5
+speed_scale = 0.8
+explosiveness = 0.05
+randomness = 0.15
+local_coords = true
+texture = ExtResource("1_ie140")
+emission_shape = 1
+emission_sphere_radius = 6.47
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.2
+initial_velocity_max = 111.11
+angle_max = 360.0
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+color_ramp = SubResource("Gradient_ubnq7")
+
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="LifetimeTimer" type="Timer" parent="."]
+one_shot = true

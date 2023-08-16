@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmxhb0jduygfk"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/BulletBase.cs" id="1"]
+
+[node name="BulletBase" type="Area2D"]
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]

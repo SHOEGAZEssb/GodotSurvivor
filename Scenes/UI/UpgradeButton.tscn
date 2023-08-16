@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckq14u3n4l4xh"]
+
+[ext_resource type="Script" path="res://Scenes/UI/UpgradeButton.cs" id="1_ru58v"]
+
+[node name="UpgradeButton" type="Button"]
+process_mode = 3
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_ru58v")
+
+[connection signal="pressed" from="." to="." method="OnButtonPressed"]

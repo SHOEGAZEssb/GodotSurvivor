@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "Godot Survivor": {
+      "commandName": "Project"
+    },
+    "Launch Godot": {
+      "commandName": "Executable",
+      "executablePath": "D:\\Stuff\\Gamedev\\Godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+      "commandLineArgs": "--path . --verbose",
+      "workingDirectory": "D:\\Stuff\\Gamedev\\GodotSurvivor"
+    }
+  }
+}

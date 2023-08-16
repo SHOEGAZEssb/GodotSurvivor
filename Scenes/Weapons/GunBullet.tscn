@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://b6mniywjdsvx6"]
+
+[ext_resource type="PackedScene" uid="uid://bmxhb0jduygfk" path="res://Scenes/Weapons/BulletBase.tscn" id="1"]
+[ext_resource type="Texture2D" uid="uid://vfri61nqxmdr" path="res://Sprites/Weapons/GunBullet.png" id="2"]
+[ext_resource type="Script" path="res://Scenes/Weapons/GunBullet.cs" id="3"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 8.5)
+
+[node name="BulletBase" instance=ExtResource("1")]
+script = ExtResource("3")
+Speed = 500.0
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(2, -0.5)
+shape = SubResource("1")
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://6n5cju578tgv"]
+
+[ext_resource type="Script" path="res://Scenes/DamageText.cs" id="1"]
+
+[node name="Label" type="Label"]
+offset_right = 40.0
+offset_bottom = 14.0
+text = "Test"
+script = ExtResource("1")

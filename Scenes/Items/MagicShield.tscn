@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://djk2p2p0q1due"]
+
+[ext_resource type="Script" path="res://Scenes/Items/MagicShield.cs" id="1_88f5s"]
+[ext_resource type="Texture2D" uid="uid://ddmqoc3v6o03o" path="res://Sprites/Items/MagicShield.png" id="2_qxo3c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_abrov"]
+radius = 76.2365
+
+[node name="MagicShield" type="Area2D"]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_88f5s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_abrov")
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+texture = ExtResource("2_qxo3c")
+
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true

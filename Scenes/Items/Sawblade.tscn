@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://blenxce4vxl02"]
+
+[ext_resource type="Script" path="res://Scenes/Items/Sawblade.cs" id="1_j483w"]
+
+[node name="Sawblade" type="Node2D"]
+script = ExtResource("1_j483w")

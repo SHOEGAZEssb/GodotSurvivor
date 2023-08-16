@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkkshlddufttv"]
+
+[ext_resource type="Script" path="res://Scenes/Pickups/Chest.cs" id="1_oyhnm"]
+[ext_resource type="Texture2D" uid="uid://cxprf6ns8v1db" path="res://Sprites/Pickups/Chests.png" id="2_dmrm5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ib6mu"]
+size = Vector2(30, 21)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llcbu"]
+atlas = ExtResource("2_dmrm5")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w3hiy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llcbu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Chest" type="Area2D"]
+script = ExtResource("1_oyhnm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.2, 1.27)
+shape = SubResource("RectangleShape2D_ib6mu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(9.11, -4.86)
+sprite_frames = SubResource("SpriteFrames_w3hiy")
+animation = &"idle"
+
+[connection signal="area_entered" from="." to="." method="OnAreaEntered"]

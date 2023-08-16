@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://rhmu223wodsv"]
+
+[ext_resource type="Texture2D" uid="uid://b1tmh8kw71q12" path="res://Sprites/Pickups/exp.png" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Pickups/PickupBase.tscn" id="2"]
+[ext_resource type="Script" path="res://Scenes/Pickups/ExpCrystal.cs" id="3"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 5.0
+
+[node name="ExpCrystal" instance=ExtResource("2")]
+script = ExtResource("3")
+Experience = 1
+
+[node name="CollisionShape2D" parent="." index="0"]
+shape = SubResource("1")
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("1")
