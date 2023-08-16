@@ -57,6 +57,9 @@ namespace GodotSurvivor.Scenes.Player
 
 		public override void _PhysicsProcess(double delta)
 		{
+			if (Input.IsKeyPressed(Key.Shift))
+				PlayerStats.CurrentExperience = PlayerStats.ExperienceToNextLevel;
+
 			var velocity = GetInput();
 			AnimatePlayer(velocity);
 			Position += velocity * (float)delta;

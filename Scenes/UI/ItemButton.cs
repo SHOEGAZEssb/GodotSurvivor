@@ -21,7 +21,7 @@ namespace GodotSurvivor.Scenes.UI
 			_descriptionLabel = GetNode<Label>("DescriptionLabel");
 
 			// temporarily instanciate item to get metadata
-			var item = ItemScene.Instantiate<Node2D>();
+			var item = ItemScene.Instantiate<Node>();
 			var itemInfo = (item as IItem).Metadata;
 			_itemImageRect.Texture = ResourceLoader.Load<Texture2D>(itemInfo.TexturePath);
 			_nameLabel.Text = itemInfo.Name;

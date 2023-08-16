@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://5m033uf7mfxr"]
+
+[ext_resource type="Script" path="res://Scenes/Items/GlowingCoal.cs" id="1_r0d0a"]
+
+[node name="GlowingCoal" type="Node"]
+script = ExtResource("1_r0d0a")

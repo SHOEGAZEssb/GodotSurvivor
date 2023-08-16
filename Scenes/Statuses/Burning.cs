@@ -32,7 +32,7 @@ public partial class Burning : Node2D
 	{
 		if (_delayTimer.IsStopped())
 		{
-			_target.TakeDamage((Damage, false));
+			_target.TakeDamage(new DamageInfo(Damage, false, DamageSource.Burning, _target as Node2D, this));
 			_delayTimer.Start();
 		}
 

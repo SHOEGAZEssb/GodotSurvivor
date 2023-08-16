@@ -1,4 +1,5 @@
 ﻿using Godot;
+using GodotSurvivor.Scenes.Enemies;
 using GodotSurvivor.Scenes.Items;
 using System;
 using System.Collections.Generic;
@@ -244,6 +245,25 @@ namespace GodotSurvivor.Scenes.Player
 
 		#endregion Construction
 
+		#region Events
+
+		public event EventHandler<DamageInfo> EnemyDamagedEventHandler;
+
+		public void OnEnemyDamaged(DamageInfo damageInfo)
+		{
+			EnemyDamagedEventHandler?.Invoke(this, damageInfo);
+		}
+
+		public event EventHandler<DamageInfo> EnemyKilledEventHandler;
+
+		public void OnEnemyKilled(DamageInfo damageInfo)
+		{
+			NumKilledEnemies++;
+			EnemyKilledEventHandler?.Invoke(this, damageInfo);
+		}
+
+		#endregion Events
+
 		private List<Upgrade> CreateUpgrades()
 		{
 			return new List<Upgrade>()
@@ -258,7 +278,8 @@ namespace GodotSurvivor.Scenes.Player
 			return new List<PackedScene>()
 			{
 				ResourceLoader.Load<PackedScene>("res://Scenes/Items/MagicShield.tscn"),
-				ResourceLoader.Load<PackedScene>("res://Scenes/Items/Sawblade.tscn")
+				ResourceLoader.Load<PackedScene>("res://Scenes/Items/Sawblade.tscn"),
+				ResourceLoader.Load<PackedScene>("res://Scenes/Items/GlowingCoal.tscn")
 			};
 		}
 	}

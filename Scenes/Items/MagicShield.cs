@@ -90,7 +90,8 @@ namespace GodotSurvivor.Scenes.Items
 				foreach (var enemy in enemies)
 				{
 					DamageHelper.ApplyStatuses(enemy as Node, ApplyableStatuses);
-					enemy.TakeDamage(DamageHelper.CalculateCrit(Damage, Stats.CurrentStats.CritRate));
+					var (damage, crit) = DamageHelper.CalculateCrit(Damage, Stats.CurrentStats.CritRate);
+					enemy.TakeDamage(new DamageInfo(damage, crit, DamageSource.Ability, enemy as Node2D, this));
 				}
 				_delayTimer.Start();
 			}

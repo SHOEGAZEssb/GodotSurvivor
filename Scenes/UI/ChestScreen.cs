@@ -28,7 +28,7 @@ namespace GodotSurvivor.Scenes.UI
 
 		private void ItemButton_ItemChosen(PackedScene itemScene)
 		{
-			var item = itemScene.Instantiate<Node2D>();
+			var item = itemScene.Instantiate<Node>();
 			GetTree().CurrentScene.AddChild(item);
 			GetTree().Paused = false;
 			EmitSignal(SignalName.ItemChosen);

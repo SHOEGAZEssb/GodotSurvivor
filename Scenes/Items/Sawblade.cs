@@ -179,7 +179,8 @@ namespace GodotSurvivor.Scenes.Items
 			else
 			{
 				DamageHelper.ApplyStatuses(e as Node, ApplyableStatuses);
-				e.TakeDamage(DamageHelper.CalculateCrit(Damage, Stats.CurrentStats.CritRate));
+				var (damage, crit) = DamageHelper.CalculateCrit(Damage, Stats.CurrentStats.CritRate);
+				e.TakeDamage(new DamageInfo(damage, crit, DamageSource.Ability, e as Node2D, this));
 			}
 		}
 	}

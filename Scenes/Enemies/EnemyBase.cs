@@ -40,25 +40,26 @@ namespace GodotSurvivor.Scenes.Enemies
 			_expCrystalScene = ResourceLoader.Load<PackedScene>("res://Scenes/Pickups/ExpCrystal.tscn");
 		}
 
-		public void TakeDamage((int damage, bool crit) damageInfo)
+		public void TakeDamage(DamageInfo damageInfo)
 		{
-			HP -= damageInfo.damage;
-			_damageTextManager.ShowFloatingText(damageInfo.damage, Position, damageInfo.crit);
+			HP -= damageInfo.Damage;
+			_damageTextManager.ShowFloatingText(damageInfo.Damage, Position, damageInfo.Crit);
+			Stats.CurrentStats.OnEnemyDamaged(damageInfo);
 			EmitSignal(SignalName.OnTakeDamage);
 			if (HP <= 0)
 			{
-				OnDeath();
+				OnDeath(damageInfo);
 				QueueFree();
 			}
 		}
 
-		protected virtual void OnDeath()
+		protected virtual void OnDeath(DamageInfo damageInfo)
 		{
+			Stats.CurrentStats.OnEnemyKilled(damageInfo);
 			var expCrystal = _expCrystalScene.Instantiate<ExpCrystal>();
 			expCrystal.Experience = ExperienceWorth; // ExpGainMultiplier will be added in the Stats
 			GetTree().CurrentScene.AddChild(expCrystal);
 			expCrystal.Position = GlobalPosition;
-			Stats.CurrentStats.NumKilledEnemies += 1;
 		}
 
 		protected virtual void OnAreaEntered(Area2D other)

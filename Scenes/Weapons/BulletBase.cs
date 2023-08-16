@@ -1,6 +1,7 @@
 using Godot;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Player;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GodotSurvivor.Scenes.Weapons
 {
@@ -13,7 +14,8 @@ namespace GodotSurvivor.Scenes.Weapons
 		{
 			if (body is IDamageableByPlayer e)
 			{
-				e.TakeDamage(DamageHelper.CalculateCrit(BaseDamage, Stats.CurrentStats.CritRate));
+				var (damage, crit) = DamageHelper.CalculateCrit(BaseDamage, Stats.CurrentStats.CritRate);
+				e.TakeDamage(new DamageInfo(damage, crit, DamageSource.Weapon, e as Node2D, this));
 				QueueFree();
 			}
 		}

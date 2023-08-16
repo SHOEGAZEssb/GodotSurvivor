@@ -384,4 +384,7 @@ size_flags_vertical = 1
 position = Vector2(508, 241)
 
 [node name="Chest" parent="." instance=ExtResource("7_03cbp")]
-position = Vector2(413, 105)
+position = Vector2(381, 122)
+
+[node name="Chest2" parent="." instance=ExtResource("7_03cbp")]
+position = Vector2(426, 153)
