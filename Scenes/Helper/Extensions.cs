@@ -30,7 +30,7 @@ namespace GodotSurvivor.Scenes.Helper
 
 	public static class ICanApplyStatusesExtensions
 	{
-		private static IDictionary<string, PackedScene> _statusScenes;
+    private static readonly IDictionary<string, PackedScene> _statusScenes;
 
 		static ICanApplyStatusesExtensions()
 		{
@@ -42,8 +42,16 @@ namespace GodotSurvivor.Scenes.Helper
 
 		public static void AddApplyableStatusByName(this ICanApplyStatuses node, string name, float chance)
 		{
-			// if status already exists, increment chance
-			if (node.ApplyableStatuses.ContainsKey(name))
+			AddApplyableStatus(node, name, chance, _statusScenes[name]);
 		}
-	}
+
+		public static void AddApplyableStatus(this ICanApplyStatuses node, string name, float chance, PackedScene statusScene) 
+		{
+      // if status already exists, increment chance
+      if (node.ApplyableStatuses.ContainsKey(name))
+				node.ApplyableStatuses[name] = (statusScene, node.ApplyableStatuses[name].chance + chance);
+			else
+				node.ApplyableStatuses.Add(name, (statusScene, chance));
+    }
+  }
 }

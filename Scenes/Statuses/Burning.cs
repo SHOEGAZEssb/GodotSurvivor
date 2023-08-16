@@ -4,8 +4,8 @@ using System;
 
 public partial class Burning : Node2D
 {
-	public int Damage;
-	public float Delay;
+	public int Damage = 1;
+	public float Delay = 1f;
 	public float? Lifetime;
 
 	private IDamageableByPlayer _target;
@@ -36,7 +36,19 @@ public partial class Burning : Node2D
 			_delayTimer.Start();
 		}
 
-		if (_lifetimeTimer.IsStopped())
+		if (Lifetime.HasValue && _lifetimeTimer.IsStopped())
 			QueueFree();
 	}
+
+	public static PackedScene CreateCustomPackedScene(int damage, float delay, float? lifetime = null)
+	{
+		var burning = ResourceLoader.Load<PackedScene>("res://Scenes/Statuses/Burning.tscn").Instantiate<Burning>();
+		burning.Damage = damage;
+		burning.Delay = delay;
+		burning.Lifetime = lifetime;
+
+		var newScene = new PackedScene();
+		newScene.Pack(burning);
+		return newScene;
+  }
 }

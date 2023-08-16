@@ -88,7 +88,10 @@ namespace GodotSurvivor.Scenes.Items
 			{
 				var enemies = GetOverlappingBodies().OfType<IDamageableByPlayer>();
 				foreach (var enemy in enemies)
+				{
+					DamageHelper.ApplyStatuses(enemy as Node, ApplyableStatuses);
 					enemy.TakeDamage(DamageHelper.CalculateCrit(Damage, Stats.CurrentStats.CritRate));
+				}
 				_delayTimer.Start();
 			}
 		}
@@ -99,7 +102,8 @@ namespace GodotSurvivor.Scenes.Items
 			{
 				new Upgrade("", "-10% Attack Delay", UpgradeType.Ability, () => DelayMultiplier -= 0.1f),
 				new Upgrade("", "+20% Damage", UpgradeType.Ability, () => DamageMultiplier += 0.2f),
-				new Upgrade("", "+15% Size", UpgradeType.Ability, () => SizeMultiplier += 0.15f)
+				new Upgrade("", "+15% Size", UpgradeType.Ability, () => SizeMultiplier += 0.15f),
+				new Upgrade("", "50% Chance to apply Burning", UpgradeType.Ability, () => this.AddApplyableStatus("Burning", 0.5f, Burning.CreateCustomPackedScene(1, 1f)), null, true)
 			};
 		}
 	}

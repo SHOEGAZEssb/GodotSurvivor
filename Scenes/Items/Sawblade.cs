@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace GodotSurvivor.Scenes.Items
 {
-	public partial class Sawblade : Node2D, IAbility
+  public partial class Sawblade : Node2D, IAbility
 	{
 		#region Properties
 
@@ -89,11 +89,13 @@ namespace GodotSurvivor.Scenes.Items
 					part.Scale = new Vector2(SizeBase * SizeMultiplier, SizeBase * SizeMultiplier);
 			}
 		}
-		private float _sizeMultiplier = 1f;
+	private float _sizeMultiplier = 1f;
 
-		#endregion Size
+	#endregion Size
 
-		private readonly List<SawbladePart> _parts = new();
+	public IDictionary<string, (PackedScene statusScene, float chance)> ApplyableStatuses => throw new NotImplementedException();
+
+	private readonly List<SawbladePart> _parts = new();
 
 		#endregion Properties
 
@@ -149,7 +151,7 @@ namespace GodotSurvivor.Scenes.Items
 				new Upgrade("", "+1 Sawblade", UpgradeType.Ability, new Action(() => Amount += 1)),
 				new Upgrade("", "+15% Rotation Speed", UpgradeType.Ability, new Action(() => RotationSpeedMultiplier += 0.15f)),
 				new Upgrade("", "+10% Size", UpgradeType.Ability, new Action(() => SizeMultiplier += 0.1f)),
-				new Upgrade("", "Low chance to split enemies in two", UpgradeType.Ability, new Action(() => _dividerUpgradeActive = true), null, true)
+				new Upgrade("", "Low chance to split enemies in two", UpgradeType.Ability, new Action(() => _dividerUpgradeActive = true), null, true),
 			};
 		}
 
@@ -175,7 +177,10 @@ namespace GodotSurvivor.Scenes.Items
 				enemy.QueueFree();
 			}
 			else
+			{
+				DamageHelper.ApplyStatuses(e as Node, ApplyableStatuses);
 				e.TakeDamage(DamageHelper.CalculateCrit(Damage, Stats.CurrentStats.CritRate));
+			}
 		}
 	}
 }
