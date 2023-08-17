@@ -1,6 +1,5 @@
 using Godot;
 using GodotSurvivor.Scenes;
-using System;
 
 public partial class Burning : Node2D
 {
@@ -50,5 +49,5 @@ public partial class Burning : Node2D
 		var newScene = new PackedScene();
 		newScene.Pack(burning);
 		return newScene;
-  }
+	}
 }

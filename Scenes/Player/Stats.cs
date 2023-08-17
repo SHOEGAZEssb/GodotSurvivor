@@ -1,5 +1,4 @@
 ﻿using Godot;
-using GodotSurvivor.Scenes.Enemies;
 using GodotSurvivor.Scenes.Items;
 using System;
 using System.Collections.Generic;
@@ -188,7 +187,7 @@ namespace GodotSurvivor.Scenes.Player
 			get
 			{
 				IEnumerable<Upgrade> list = _availablePlayerUpgrades;
-				foreach(var ability in Items.OfType<IAbility>())
+				foreach (var ability in Items.OfType<IAbility>())
 					list = list.Concat(ability.AvailableUpgrades);
 
 				return list.Where(u => u.IsApplicable && (!u.Unique || !ChosenUpgrades.Contains(u))).ToList();

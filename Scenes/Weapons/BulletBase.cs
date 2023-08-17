@@ -1,7 +1,6 @@
 using Godot;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Player;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace GodotSurvivor.Scenes.Weapons
 {

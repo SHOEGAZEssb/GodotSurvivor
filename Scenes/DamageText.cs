@@ -5,7 +5,7 @@ public partial class DamageText : Label
 	public void ShowValue(string value, Vector2 initialPosition, Vector2 travel, float duration, double spread, bool crit)
 	{
 		Text = value;
-		var movement = travel.Rotated((float)GD.RandRange(-spread/2, spread/2));
+		var movement = travel.Rotated((float)GD.RandRange(-spread / 2, spread / 2));
 		PivotOffset = Size / 2;
 
 		var tween = GetTree().CreateTween().SetParallel(true);

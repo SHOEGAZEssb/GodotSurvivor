@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace GodotSurvivor.Scenes.Items
 {
-  public partial class Sawblade : Node2D, IAbility
+	public partial class Sawblade : Node2D, IAbility
 	{
 		#region Properties
 
@@ -89,13 +89,13 @@ namespace GodotSurvivor.Scenes.Items
 					part.Scale = new Vector2(SizeBase * SizeMultiplier, SizeBase * SizeMultiplier);
 			}
 		}
-	private float _sizeMultiplier = 1f;
+		private float _sizeMultiplier = 1f;
 
-	#endregion Size
+		#endregion Size
 
-	public IDictionary<string, (PackedScene statusScene, float chance)> ApplyableStatuses => throw new NotImplementedException();
+		public IDictionary<string, (PackedScene statusScene, float chance)> ApplyableStatuses => throw new NotImplementedException();
 
-	private readonly List<SawbladePart> _parts = new();
+		private readonly List<SawbladePart> _parts = new();
 
 		#endregion Properties
 
@@ -119,7 +119,7 @@ namespace GodotSurvivor.Scenes.Items
 			{
 				var part = _parts[i];
 				part.Position = Position + new Vector2((float)Math.Cos(DegreesToRadians(CurrentRotation + i * separation)),
-													   (float)Math.Sin(DegreesToRadians(CurrentRotation + i * separation))) * Distance;
+														 (float)Math.Sin(DegreesToRadians(CurrentRotation + i * separation))) * Distance;
 			}
 
 			CurrentRotation += RotationSpeed;
