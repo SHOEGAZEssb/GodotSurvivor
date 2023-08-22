@@ -4,6 +4,9 @@ using System;
 
 namespace GodotSurvivor.Scenes.Enemies
 {
+	/// <summary>
+	/// Handles the spawning of enemies and enemy waves.
+	/// </summary>
 	public partial class EnemySpawner : Node2D
 	{
 		private PackedScene _weakEnemyScene;
@@ -30,8 +33,8 @@ namespace GodotSurvivor.Scenes.Enemies
 			for (int i = 0; i < amount; i++)
 			{
 				var enemy = _weakEnemyScene.Instantiate<WeakEnemy>();
-				currentScene.AddChild(enemy);
 				enemy.Position = _player.Position + new Vector2(300, 0).Rotated((float)GD.RandRange(0, 2 * Math.PI));
+				currentScene.AddChild(enemy);
 			}
 		}
 	}

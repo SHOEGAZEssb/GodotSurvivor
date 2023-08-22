@@ -4,22 +4,41 @@ using GodotSurvivor.Scenes.Player;
 
 namespace GodotSurvivor.Scenes.Enemies
 {
+	/// <summary>
+	/// Base class for most, if not all enemies.
+	/// </summary>
 	public partial class EnemyBase : CharacterBody2D, IDamageableByPlayer
 	{
+		/// <summary>
+		/// Base movement speed.
+		/// </summary>
 		[Export]
-		public int Speed = 80;
+		public float Speed = 70f;
 
+		/// <summary>
+		/// Current hp.
+		/// </summary>
 		[Export]
 		public int HP = 20;
 
 		[Export]
 		public int BaseTouchDamage = 5;
 
+		/// <summary>
+		/// Amount of experience this enemy drops on death.
+		/// </summary>
 		[Export]
 		public int ExperienceWorth = 1;
 
+		/// <summary>
+		/// Signal name of the <see cref="OnTakeDamageEventHandler"/>.
+		/// (Workaround for interfaces not having events)
+		/// </summary>
 		public string OnTakeDamageSignalName => SignalName.OnTakeDamage;
 
+		/// <summary>
+		/// Event that is fired when this enemy takes damage.
+		/// </summary>
 		[Signal]
 		public delegate void OnTakeDamageEventHandler();
 
@@ -38,6 +57,10 @@ namespace GodotSurvivor.Scenes.Enemies
 			_expCrystalScene = ResourceLoader.Load<PackedScene>("res://Scenes/Pickups/ExpCrystal.tscn");
 		}
 
+		/// <summary>
+		/// Damage this enemy.
+		/// </summary>
+		/// <param name="damageInfo">Info of the damage.</param>
 		public void TakeDamage(DamageInfo damageInfo)
 		{
 			HP -= damageInfo.Damage;
@@ -51,6 +74,10 @@ namespace GodotSurvivor.Scenes.Enemies
 			}
 		}
 
+		/// <summary>
+		/// Drops experience when this enemy is killed.
+		/// </summary>
+		/// <param name="damageInfo">Damage info that lead to the death.</param>
 		protected virtual void OnDeath(DamageInfo damageInfo)
 		{
 			Stats.CurrentStats.OnEnemyKilled(damageInfo);

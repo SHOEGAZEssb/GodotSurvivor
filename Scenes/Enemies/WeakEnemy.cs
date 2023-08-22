@@ -2,6 +2,10 @@ using Godot;
 
 namespace GodotSurvivor.Scenes.Enemies
 {
+	/// <summary>
+	/// A basic enemy that runs towards the player
+	/// and damages them when touched.
+	/// </summary>
 	public partial class WeakEnemy : EnemyBase
 	{
 		public override void _PhysicsProcess(double delta)

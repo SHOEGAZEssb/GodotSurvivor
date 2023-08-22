@@ -4,6 +4,10 @@ using GodotSurvivor.Scenes.Player;
 
 namespace GodotSurvivor.Scenes.UI
 {
+	/// <summary>
+	/// Screen that is shown when the player levels up.
+	/// Presents different <see cref="Upgrade"/> choices.
+	/// </summary>
 	public partial class LevelUpScreen : Control
 	{
 		private VBoxContainer _buttonContainer;

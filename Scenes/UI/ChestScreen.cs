@@ -4,8 +4,15 @@ using GodotSurvivor.Scenes.Player;
 
 namespace GodotSurvivor.Scenes.UI
 {
+	/// <summary>
+	/// Screen thats shown when a <see cref="Pickups.Chest"/> is picked up.
+	/// Presents the player with item choices.
+	/// </summary>
 	public partial class ChestScreen : CenterContainer
 	{
+		/// <summary>
+		/// Event that is fired when an item was chosen.
+		/// </summary>
 		[Signal]
 		public delegate void ItemChosenEventHandler();
 

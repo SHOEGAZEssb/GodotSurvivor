@@ -3,6 +3,9 @@ using System.Linq;
 
 namespace GodotSurvivor.Scenes.Pickups
 {
+	/// <summary>
+	/// Collects all other item pickups upon being picked up.
+	/// </summary>
 	internal partial class ItemVacuum : ItemPickupBase
 	{
 		protected override void OnPickup(PlayerController player)

@@ -3,6 +3,9 @@ using GodotSurvivor.Scenes.Player;
 
 namespace GodotSurvivor.Scenes.UI
 {
+	/// <summary>
+	/// Bar for displaying player health.
+	/// </summary>
 	public partial class HealthBar : TextureProgressBar
 	{
 		private Label _label;

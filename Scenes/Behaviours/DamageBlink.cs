@@ -2,6 +2,9 @@ using Godot;
 
 namespace GodotSurvivor.Scenes.Behaviours
 {
+	/// <summary>
+	/// Makes its IDamageable parent blink red when taking damage.
+	/// </summary>
 	public partial class DamageBlink : Node2D
 	{
 		private AnimatedSprite2D _sprite;
@@ -15,6 +18,9 @@ namespace GodotSurvivor.Scenes.Behaviours
 			_sprite = parent.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		}
 
+		/// <summary>
+		/// Make the <see cref="_sprite"/> blink red once.
+		/// </summary>
 		private void OnTakeDamage()
 		{
 			_tween?.Kill();

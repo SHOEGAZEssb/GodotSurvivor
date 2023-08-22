@@ -3,6 +3,9 @@ using GodotSurvivor.Scenes.Player;
 
 namespace GodotSurvivor.Scenes.UI
 {
+	/// <summary>
+	/// Bar for displaying experience progress.
+	/// </summary>
 	public partial class ExpBar : TextureProgressBar
 	{
 		private Label _label;

@@ -5,8 +5,21 @@ using System.Linq;
 
 namespace GodotSurvivor.Scenes.Helper
 {
+	/// <summary>
+	/// IEnumerable extensions.
+	/// </summary>
 	public static class ListExtensions
 	{
+		/// <summary>
+		/// Gets <paramref name="num"/> amount random unique items
+		/// form this list.
+		/// </summary>
+		/// <typeparam name="T">Type of the items to get.</typeparam>
+		/// <param name="list">List to get items from.</param>
+		/// <param name="num">Amount of items to get.
+		/// If the list contains less items than <paramref name="num"/>, only
+		/// so many are returned.</param>
+		/// <returns>Random unique items.</returns>
 		public static IEnumerable<T> GetRandomListItems<T>(this IEnumerable<T> list, int num)
 		{
 			var randomItems = new List<T>();
@@ -28,10 +41,17 @@ namespace GodotSurvivor.Scenes.Helper
 		}
 	}
 
+	/// <summary>
+	/// Extensions for the <see cref="ICanApplyStatuses"/> interface.
+	/// </summary>
 	public static class ICanApplyStatusesExtensions
 	{
 		private static readonly IDictionary<string, PackedScene> _statusScenes;
 
+		/// <summary>
+		/// Static constructor.
+		/// Initializes the <see cref="_statusScenes"/> dictionary.
+		/// </summary>
 		static ICanApplyStatusesExtensions()
 		{
 			_statusScenes = new Dictionary<string, PackedScene>()
@@ -40,11 +60,14 @@ namespace GodotSurvivor.Scenes.Helper
 			};
 		}
 
-		public static void AddApplyableStatusByName(this ICanApplyStatuses node, string name, float chance)
-		{
-			AddApplyableStatus(node, name, chance, _statusScenes[name]);
-		}
-
+		/// <summary>
+		/// Adds a new status to the list of applyable statuses of a node.
+		/// </summary>
+		/// <param name="node">Node to add status to.</param>
+		/// <param name="name">Name of the status.</param>
+		/// <param name="chance">Chance to trigger status apply.
+		/// If the status already exists, the chance will be incremented.</param>
+		/// <param name="statusScene">Scene of the status.</param>
 		public static void AddApplyableStatus(this ICanApplyStatuses node, string name, float chance, PackedScene statusScene)
 		{
 			// if status already exists, increment chance

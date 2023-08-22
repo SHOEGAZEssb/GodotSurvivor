@@ -7,6 +7,10 @@ using System.Collections.Generic;
 
 namespace GodotSurvivor.Scenes.Items
 {
+	/// <summary>
+	/// Ability item that rotates around the player
+	/// and damages enemies it hits.
+	/// </summary>
 	public partial class Sawblade : Node2D, IAbility
 	{
 		#region Properties
@@ -20,16 +24,28 @@ namespace GodotSurvivor.Scenes.Items
 
 		#region Damage
 
+		/// <summary>
+		/// Base damage.
+		/// </summary>
 		public int DamageBase = 3;
 
+		/// <summary>
+		/// Damage multiplier.
+		/// </summary>
 		public float DamageMultiplier = 1f;
 
+		/// <summary>
+		/// Damage the sawblade parts do when hitting an enemy.
+		/// </summary>
 		public int Damage => (int)Math.Round(DamageBase * DamageMultiplier);
 
 		#endregion Damage
 
 		#region Amount
 
+		/// <summary>
+		/// Amount of rotating sawblade parts.
+		/// </summary>
 		public int Amount
 		{
 			get => _amount;
@@ -45,20 +61,38 @@ namespace GodotSurvivor.Scenes.Items
 
 		#region Distance
 
+		/// <summary>
+		/// Base distance of the sawblade parts to the player.
+		/// </summary>
 		public float DistanceBase = 100f;
 
+		/// <summary>
+		/// Distance multiplier.
+		/// </summary>
 		public float DistanceMultiplier = 1f;
 
+		/// <summary>
+		/// Distance of the sawblade parts to the player.
+		/// </summary>
 		public float Distance => DistanceBase * DistanceMultiplier;
 
 		#endregion Distance
 
 		#region Rotation
 
+		/// <summary>
+		/// Base sawblade part rotation speed around the player.
+		/// </summary>
 		public float RotationSpeedBase = 1f;
 
+		/// <summary>
+		/// Rotation speed multiplier.
+		/// </summary>
 		public float RotationSpeedMultiplier = 1f;
 
+		/// <summary>
+		/// Sawblade part rotation speed around the player.
+		/// </summary>
 		public float RotationSpeed => RotationSpeedBase * RotationSpeedMultiplier;
 
 		private float CurrentRotation
@@ -77,8 +111,14 @@ namespace GodotSurvivor.Scenes.Items
 
 		#region Size
 
+		/// <summary>
+		/// Base size of a sawblade part.
+		/// </summary>
 		public float SizeBase = 0.2f;
 
+		/// <summary>
+		/// Sawblade part size multiplier.
+		/// </summary>
 		public float SizeMultiplier
 		{
 			get => _sizeMultiplier;

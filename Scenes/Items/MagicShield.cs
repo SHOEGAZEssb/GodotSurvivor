@@ -1,6 +1,7 @@
 using Godot;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Player;
+using GodotSurvivor.Scenes.Statuses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,14 @@ namespace GodotSurvivor.Scenes.Items
 
 		#region Size
 
+		/// <summary>
+		/// Base size of the shield.
+		/// </summary>
 		public float SizeBase = 0.5f;
 
+		/// <summary>
+		/// Shield size multiplier.
+		/// </summary>
 		public float SizeMultiplier
 		{
 			get => _sizeMultiplier;
@@ -32,18 +39,33 @@ namespace GodotSurvivor.Scenes.Items
 
 		#region Damage
 
+		/// <summary>
+		/// Base damage of the shield.
+		/// </summary>
 		public int DamageBase = 5;
 
+		/// <summary>
+		/// Damage multiplier.
+		/// </summary>
 		public float DamageMultiplier = 1f;
 
+		/// <summary>
+		/// Damage per tick.
+		/// </summary>
 		public int Damage => (int)Math.Round(DamageBase * DamageMultiplier);
 
 		#endregion Damage
 
 		#region Delay
 
+		/// <summary>
+		/// Base time between each ticks in seconds.
+		/// </summary>
 		public float DelayBase = 3f;
 
+		/// <summary>
+		/// Delay multiplier.
+		/// </summary>
 		public float DelayMultiplier
 		{
 			get => _delayMultiplier;
@@ -55,6 +77,9 @@ namespace GodotSurvivor.Scenes.Items
 		}
 		private float _delayMultiplier = 1f;
 
+		/// <summary>
+		/// Time between each ticks in seconds.
+		/// </summary>
 		public float Delay => DelayBase * DelayMultiplier;
 
 		private Timer _delayTimer;

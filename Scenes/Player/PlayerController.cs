@@ -4,25 +4,31 @@ using GodotSurvivor.Scenes.Weapons;
 
 namespace GodotSurvivor.Scenes.Player
 {
+	/// <summary>
+	/// Controls the player.
+	/// </summary>
 	public partial class PlayerController : Area2D, IDamageableByEnemy
 	{
 		#region Properties
 
+		/// <summary>
+		/// Stats of this player.
+		/// </summary>
 		[Export]
 		public Stats PlayerStats;
 
+		/// <summary>
+		/// Currently equipped weapon.
+		/// </summary>
 		public WeaponBase CurrentWeapon => _pistol;
 
 		public string OnTakeDamageSignalName => SignalName.OnTakeDamage;
 
 		#endregion Properties
 
-		[Signal]
-		public delegate void ExpGainedEventHandler();
-
-		[Signal]
-		public delegate void LevelGainedEventHandler();
-
+		/// <summary>
+		/// Event that is fired when the player is damaged.
+		/// </summary>
 		[Signal]
 		public delegate void OnTakeDamageEventHandler();
 
@@ -65,11 +71,10 @@ namespace GodotSurvivor.Scenes.Player
 			Position += velocity * (float)delta;
 		}
 
-		public void GainExperience(int experience)
-		{
-			PlayerStats.CurrentExperience += experience;
-		}
-
+		/// <summary>
+		/// Damage the player.
+		/// </summary>
+		/// <param name="damage">Damage to take (without defense calculation).</param>
 		public void TakeDamage(int damage)
 		{
 			if (_invincibilityTimer.IsStopped())

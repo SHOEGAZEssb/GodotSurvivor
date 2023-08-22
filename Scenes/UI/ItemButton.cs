@@ -3,13 +3,24 @@ using GodotSurvivor.Scenes.Items;
 
 namespace GodotSurvivor.Scenes.UI
 {
+	/// <summary>
+	/// Button for choosing an item in the <see cref="ChestScreen"/>.
+	/// </summary>
 	public partial class ItemButton : VBoxContainer
 	{
+		/// <summary>
+		/// The item scene that the player will get when
+		/// clicking this button.
+		/// </summary>
 		public PackedScene ItemScene;
 		private TextureRect _itemImageRect;
 		private Label _nameLabel;
 		private Label _descriptionLabel;
 
+		/// <summary>
+		/// Event that is fired when this item was chosen.
+		/// </summary>
+		/// <param name="itemScene">The item scene.</param>
 		[Signal]
 		public delegate void ItemChosenEventHandler(PackedScene itemScene);
 

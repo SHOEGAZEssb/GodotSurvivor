@@ -4,6 +4,9 @@ using GodotSurvivor.Scenes.UI;
 
 namespace GodotSurvivor.Scenes.Pickups
 {
+	/// <summary>
+	/// Chest that grants random items from the <see cref="Stats.ItemPool"/>.
+	/// </summary>
 	public partial class Chest : Area2D
 	{
 		private PackedScene _chestScreenScene;

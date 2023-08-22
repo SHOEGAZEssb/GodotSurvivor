@@ -2,8 +2,14 @@ using Godot;
 
 namespace GodotSurvivor.Scenes.Pickups
 {
+	/// <summary>
+	/// Picks up <see cref="ItemPickupBase"/>s in its range.
+	/// </summary>
 	public partial class ItemPickupRange : Area2D
 	{
+		/// <summary>
+		/// The radius of the pickup range.
+		/// </summary>
 		[Export]
 		public float PickupRadius
 		{
