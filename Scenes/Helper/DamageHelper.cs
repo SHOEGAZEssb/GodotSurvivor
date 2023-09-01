@@ -27,6 +27,9 @@ namespace GodotSurvivor.Scenes.Helper
 		/// <param name="statuses">Statuses info.</param>
 		public static void ApplyStatuses(Node node, IDictionary<string, (PackedScene statusScene, float chance)> statuses)
 		{
+			if (statuses == null)
+				return;
+
 			foreach (var (statusScene, chance) in statuses.Values)
 			{
 				if (RandomHelper.HitRandomChance(chance))

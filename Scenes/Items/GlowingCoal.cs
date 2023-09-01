@@ -14,6 +14,11 @@ namespace GodotSurvivor.Scenes.Items
 
 		public override void _Ready()
 		{
+			var player = GetTree().CurrentScene.GetNode<PlayerController>("Player");
+			GetParent().RemoveChild(this);
+			player.AddChild(this);
+			player.PlayerStats.Items.Add(this);
+
 			Stats.CurrentStats.EnemyKilledEventHandler += CurrentStats_EnemyKilledEventHandler;
 		}
 

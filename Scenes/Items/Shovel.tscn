@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw2qoi82b4gy"]
+
+[ext_resource type="Script" path="res://Scenes/Items/Shovel.cs" id="1_dcpyg"]
+
+[node name="Shovel" type="Node"]
+script = ExtResource("1_dcpyg")
+
+[node name="DelayTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true

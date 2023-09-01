@@ -278,7 +278,8 @@ namespace GodotSurvivor.Scenes.Player
 			{
 				ResourceLoader.Load<PackedScene>("res://Scenes/Items/MagicShield.tscn"),
 				ResourceLoader.Load<PackedScene>("res://Scenes/Items/Sawblade.tscn"),
-				ResourceLoader.Load<PackedScene>("res://Scenes/Items/GlowingCoal.tscn")
+				ResourceLoader.Load<PackedScene>("res://Scenes/Items/GlowingCoal.tscn"),
+				ResourceLoader.Load<PackedScene>("res://Scenes/Items/Shovel.tscn")
 			};
 		}
 	}

@@ -13,7 +13,12 @@ namespace GodotSurvivor.Scenes.Enemies
 		/// Base movement speed.
 		/// </summary>
 		[Export]
-		public float Speed = 70f;
+		public float SpeedBase = 70f;
+
+		[Export]
+		public float SpeedMultiplier = 1f;
+
+		public float Speed => SpeedBase * SpeedMultiplier;
 
 		/// <summary>
 		/// Current hp.

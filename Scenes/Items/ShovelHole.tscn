@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://btymsa7w0w1ek"]
+
+[ext_resource type="Script" path="res://Scenes/Items/ShovelHole.cs" id="1_05ow5"]
+[ext_resource type="Texture2D" uid="uid://jbhse2l1xsi4" path="res://Sprites/Items/ShovelHole.png" id="2_r6vpf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i24my"]
+radius = 119.34
+
+[node name="ShovelHole" type="Area2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_05ow5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_r6vpf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i24my")

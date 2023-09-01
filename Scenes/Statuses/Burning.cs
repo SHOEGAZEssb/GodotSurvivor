@@ -1,5 +1,4 @@
 using Godot;
-using GodotSurvivor.Scenes;
 
 namespace GodotSurvivor.Scenes.Statuses
 {
@@ -11,17 +10,20 @@ namespace GodotSurvivor.Scenes.Statuses
 		/// <summary>
 		/// Damage per tick.
 		/// </summary>
+		[Export]
 		public int Damage = 1;
 
 		/// <summary>
 		/// Time between ticks in seconds.
 		/// </summary>
+		[Export]
 		public float Delay = 1f;
 
 		/// <summary>
 		/// Lifetime of the status in seconds.
 		/// </summary>
-		public float? Lifetime;
+		[Export]
+		public float Lifetime;
 
 		private IDamageableByPlayer _target;
 		private Timer _delayTimer;
@@ -35,9 +37,9 @@ namespace GodotSurvivor.Scenes.Statuses
 			_delayTimer.WaitTime = Delay;
 
 			_lifetimeTimer = GetNode<Timer>("LifetimeTimer");
-			if (Lifetime.HasValue)
+			if (Lifetime != 0)
 			{
-				_lifetimeTimer.WaitTime = Lifetime.Value;
+				_lifetimeTimer.WaitTime = Lifetime;
 				_lifetimeTimer.Start();
 			}
 		}
@@ -51,7 +53,7 @@ namespace GodotSurvivor.Scenes.Statuses
 				_delayTimer.Start();
 			}
 
-			if (Lifetime.HasValue && _lifetimeTimer.IsStopped())
+			if (Lifetime != 0 && _lifetimeTimer.IsStopped())
 				QueueFree();
 		}
 
@@ -62,7 +64,7 @@ namespace GodotSurvivor.Scenes.Statuses
 		/// <param name="delay">Delay between each tick in seconds.</param>
 		/// <param name="lifetime">Lifetime in seconds.</param>
 		/// <returns>New custom packed Burning scene.</returns>
-		public static PackedScene CreateCustomPackedScene(int damage, float delay, float? lifetime = null)
+		public static PackedScene CreateCustomPackedScene(int damage, float delay, float lifetime = 0)
 		{
 			var burning = ResourceLoader.Load<PackedScene>("res://Scenes/Statuses/Burning.tscn").Instantiate<Burning>();
 			burning.Damage = damage;

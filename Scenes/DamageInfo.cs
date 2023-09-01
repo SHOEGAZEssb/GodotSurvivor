@@ -56,7 +56,7 @@ namespace GodotSurvivor.Scenes
 		/// <summary>
 		/// Source of the damage.
 		/// </summary>
-		public Node2D Source { get; }
+		public Node Source { get; }
 
 		/// <summary>
 		///
@@ -66,7 +66,7 @@ namespace GodotSurvivor.Scenes
 		/// <param name="damageSource">Type of the damage source.</param>
 		/// <param name="target">Receiver of the damage.</param>
 		/// <param name="source">Source of the damage.</param>
-		public DamageInfo(int damage, bool crit, DamageSource damageSource, Node2D target, Node2D source)
+		public DamageInfo(int damage, bool crit, DamageSource damageSource, Node2D target, Node source)
 		{
 			Damage = damage;
 			Crit = crit;
