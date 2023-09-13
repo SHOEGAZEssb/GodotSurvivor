@@ -133,7 +133,7 @@ namespace GodotSurvivor.Scenes.Items
 
 		#endregion Size
 
-		public IDictionary<string, (PackedScene statusScene, float chance)> ApplyableStatuses => throw new NotImplementedException();
+		public IDictionary<string, (PackedScene statusScene, float chance)> ApplyableStatuses { get; } = new Dictionary<string, (PackedScene statusScene, float chance)>();
 
 		private readonly List<SawbladePart> _parts = new();
 

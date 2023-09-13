@@ -46,20 +46,6 @@ namespace GodotSurvivor.Scenes.Helper
 	/// </summary>
 	public static class ICanApplyStatusesExtensions
 	{
-		private static readonly IDictionary<string, PackedScene> _statusScenes;
-
-		/// <summary>
-		/// Static constructor.
-		/// Initializes the <see cref="_statusScenes"/> dictionary.
-		/// </summary>
-		static ICanApplyStatusesExtensions()
-		{
-			_statusScenes = new Dictionary<string, PackedScene>()
-			{
-				{ "Burning", ResourceLoader.Load<PackedScene>("res://Scenes/Statuses/Burning.tscn") }
-			};
-		}
-
 		/// <summary>
 		/// Adds a new status to the list of applyable statuses of a node.
 		/// </summary>
