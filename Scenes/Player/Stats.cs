@@ -190,7 +190,7 @@ namespace GodotSurvivor.Scenes.Player
 				foreach (var ability in Items.OfType<IAbility>())
 					list = list.Concat(ability.AvailableUpgrades);
 
-				return list.Where(u => u.IsApplicable && (!u.Unique || !ChosenUpgrades.Contains(u))).ToList();
+				return list.Where(u => u.IsApplicable && !(u.Unique && ChosenUpgrades.Contains(u))).ToList();
 			}
 		}
 		private readonly List<Upgrade> _availablePlayerUpgrades;

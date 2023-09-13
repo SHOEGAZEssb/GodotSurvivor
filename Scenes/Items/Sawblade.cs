@@ -17,7 +17,7 @@ namespace GodotSurvivor.Scenes.Items
 
 		public ItemData Metadata => new("Sawblade", "Rotates around the player and damages enemies", "res://Sprites/Placeholder.png");
 
-		public List<Upgrade> AvailableUpgrades => CreateUpgrades();
+		public List<Upgrade> AvailableUpgrades { get; private set; }
 		private bool _dividerUpgradeActive = false;
 
 		private PackedScene _sawbladePartScene;
@@ -149,6 +149,7 @@ namespace GodotSurvivor.Scenes.Items
 
 			_sawbladePartScene = ResourceLoader.Load<PackedScene>("res://Scenes/Items/SawbladePart.tscn");
 			UpdateSawbladeParts();
+			AvailableUpgrades = CreateUpgrades();
 		}
 
 		// Called every frame. 'delta' is the elapsed time since the previous frame.
