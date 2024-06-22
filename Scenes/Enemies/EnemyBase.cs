@@ -88,7 +88,7 @@ namespace GodotSurvivor.Scenes.Enemies
 			Stats.CurrentStats.OnEnemyKilled(damageInfo);
 			var expCrystal = _expCrystalScene.Instantiate<ExpCrystal>();
 			expCrystal.Experience = ExperienceWorth; // ExpGainMultiplier will be added in the Stats
-			GetTree().CurrentScene.AddChild(expCrystal);
+			GetTree().CurrentScene.CallDeferred("add_child", expCrystal);
 			expCrystal.Position = GlobalPosition;
 		}
 

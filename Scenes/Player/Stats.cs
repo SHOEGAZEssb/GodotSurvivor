@@ -267,8 +267,8 @@ namespace GodotSurvivor.Scenes.Player
 		{
 			return new List<Upgrade>()
 			{
-				new Upgrade("", "+10% Max HP", UpgradeType.Player, new Action(() => MaxHPMultiplier += 0.1f)),
-				new Upgrade("", "+10% Pickup Range", UpgradeType.Player, new Action(() => PickupRadiusMultiplier += 0.5f))
+				new("", "+10% Max HP", UpgradeType.Player, new Action(() => MaxHPMultiplier += 0.1f)),
+				new("", "+10% Pickup Range", UpgradeType.Player, new Action(() => PickupRadiusMultiplier += 0.5f))
 			};
 		}
 

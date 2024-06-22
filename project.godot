@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Godot Survivor"
 run/main_scene="res://Scenes/Ingame.tscn"
-config/features=PackedStringArray("4.1", "C#")
+config/features=PackedStringArray("4.2", "C#")
 config/icon="res://icon.png"
 
 [display]

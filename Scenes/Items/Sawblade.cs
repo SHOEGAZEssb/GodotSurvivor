@@ -188,11 +188,11 @@ namespace GodotSurvivor.Scenes.Items
 		{
 			return new List<Upgrade>()
 			{
-				new Upgrade("", "+10% Damage", UpgradeType.Ability, new Action(() => DamageMultiplier += 0.1f)),
-				new Upgrade("", "+1 Sawblade", UpgradeType.Ability, new Action(() => Amount += 1)),
-				new Upgrade("", "+15% Rotation Speed", UpgradeType.Ability, new Action(() => RotationSpeedMultiplier += 0.15f)),
-				new Upgrade("", "+10% Size", UpgradeType.Ability, new Action(() => SizeMultiplier += 0.1f)),
-				new Upgrade("", "Low chance to split enemies in two", UpgradeType.Ability, new Action(() => _dividerUpgradeActive = true), null, true),
+				new("", "+10% Damage", UpgradeType.Ability, new Action(() => DamageMultiplier += 0.1f)),
+				new("", "+1 Sawblade", UpgradeType.Ability, new Action(() => Amount += 1)),
+				new("", "+15% Rotation Speed", UpgradeType.Ability, new Action(() => RotationSpeedMultiplier += 0.15f)),
+				new("", "+10% Size", UpgradeType.Ability, new Action(() => SizeMultiplier += 0.1f)),
+				new("", "Low chance to split enemies in two", UpgradeType.Ability, new Action(() => _dividerUpgradeActive = true), null, true),
 			};
 		}
 

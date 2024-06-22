@@ -1,10 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bq5d0ubdv4h4m"]
 
-[ext_resource path="res://Sprites/Weapons/gun.png" type="Texture2D" id=1]
-[ext_resource path="res://Scenes/Weapons/WeaponBase.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Weapons/Pistol.cs" type="Script" id=3]
+[ext_resource type="Texture2D" uid="uid://b3tvqg3wpuwhh" path="res://Sprites/Weapons/gun.png" id="1"]
+[ext_resource type="PackedScene" uid="uid://iestu08xfwv2" path="res://Scenes/Weapons/WeaponBase.tscn" id="2"]
+[ext_resource type="Script" path="res://Scenes/Weapons/Pistol.cs" id="3"]
 
-[node name="Sprite2D" instance=ExtResource( 2 )]
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 1 )
-script = ExtResource( 3 )
+[node name="Sprite2D" instance=ExtResource("2")]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1")
+script = ExtResource("3")

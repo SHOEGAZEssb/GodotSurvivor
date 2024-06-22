@@ -48,7 +48,7 @@ namespace GodotSurvivor.Scenes.Player
 
 			// get weapons
 			_weaponPosition = GetNode<Node2D>("Weapon");
-			_pistolScene = ResourceLoader.Load<PackedScene>("res://Scenes/Weapons/Pistol.tscn");
+			_pistolScene = ResourceLoader.Load<PackedScene>("res://Scenes/Weapons/Flamethrower.tscn");
 
 			_pistol = _pistolScene.Instantiate<WeaponBase>();
 			_pistol.Position = _weaponPosition.Position;
