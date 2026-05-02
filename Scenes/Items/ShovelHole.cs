@@ -29,7 +29,7 @@ namespace GodotSurvivor.Scenes.Items
 		/// <summary>
 		/// The parent shovel.
 		/// </summary>
-		public Shovel Parent { get; set; }
+		public Shovel Source { get; set; }
 
 		/// <summary>
 		/// We need this counter because <see cref="Area2D.GetOverlappingBodies"/>
@@ -57,7 +57,7 @@ namespace GodotSurvivor.Scenes.Items
 				{
 					DamageHelper.ApplyStatuses(enemy as Node, ApplyableStatuses);
 					var (damage, crit) = DamageHelper.CalculateCrit(Damage, Stats.CurrentStats.CritRate);
-					enemy.TakeDamage(new DamageInfo(damage, crit, DamageSource.Ability, enemy as Node2D, Parent));
+					enemy.TakeDamage(new DamageInfo(damage, crit, DamageSource.Ability, enemy as Node2D, Source));
 				}
 
 				// fade out and remove object

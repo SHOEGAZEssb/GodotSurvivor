@@ -14,7 +14,7 @@ namespace GodotSurvivor.Scenes.Behaviours
 		public override void _Ready()
 		{
 			var parent = GetParent();
-			var bla = parent.Connect((parent as IDamageable).OnTakeDamageSignalName, Callable.From(() => OnTakeDamage()));
+			parent.Connect((parent as IDamageable).OnTakeDamageSignalName, Callable.From(() => OnTakeDamage()));
 			_sprite = parent.GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		}
 
@@ -25,9 +25,9 @@ namespace GodotSurvivor.Scenes.Behaviours
 		{
 			_tween?.Kill();
 
-			var tween = CreateTween();
-			tween.TweenProperty(_sprite, "modulate", Colors.Red, 0.0f);
-			tween.TweenCallback(Callable.From(() => _sprite.Modulate = new Color(1, 1, 1, 1))).SetDelay(0.1f);
+			_tween = CreateTween();
+			_tween.TweenProperty(_sprite, "modulate", Colors.Red, 0.0f);
+			_tween.TweenCallback(Callable.From(() => _sprite.Modulate = new Color(1, 1, 1, 1))).SetDelay(0.1f);
 		}
 	}
 }

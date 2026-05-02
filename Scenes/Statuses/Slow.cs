@@ -1,5 +1,6 @@
-﻿using Godot;
+using Godot;
 using GodotSurvivor.Scenes.Enemies;
+using System;
 
 namespace GodotSurvivor.Scenes.Statuses
 {
@@ -25,6 +26,7 @@ namespace GodotSurvivor.Scenes.Statuses
 		private Timer _lifetimeTimer;
 
 		private EnemyBase _target;
+		private float _appliedSlow;
 
 		#endregion Properties
 
@@ -42,7 +44,8 @@ namespace GodotSurvivor.Scenes.Statuses
 					_lifetimeTimer.Start();
 				}
 
-				_target.SpeedMultiplier -= SlowPercentage;
+				_appliedSlow = Math.Min(SlowPercentage, _target.SpeedMultiplier);
+				_target.SpeedMultiplier -= _appliedSlow;
 			}
 		}
 
@@ -50,7 +53,7 @@ namespace GodotSurvivor.Scenes.Statuses
 		{
 			if (Lifetime != 0 && _lifetimeTimer.IsStopped())
 			{
-				_target.SpeedMultiplier += SlowPercentage;
+				_target.SpeedMultiplier += _appliedSlow;
 				QueueFree();
 			}
 		}

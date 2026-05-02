@@ -202,9 +202,9 @@ namespace GodotSurvivor.Scenes.Items
 			{
 				// scale enemy down
 				enemy.Scale *= 0.75f;
-				enemy.HP /= 2;
-				enemy.ExperienceWorth /= 2;
-				enemy.BaseTouchDamage /= 2;
+				enemy.HP = Math.Max(1, enemy.HP / 2);
+				enemy.ExperienceWorth = Math.Max(1, enemy.ExperienceWorth / 2);
+				enemy.BaseTouchDamage = Math.Max(1, enemy.BaseTouchDamage / 2);
 				// pack enemy as scene
 				var enemyScene = new PackedScene();
 				enemyScene.Pack(enemy);
@@ -212,9 +212,10 @@ namespace GodotSurvivor.Scenes.Items
 				// instantiate the two new enemies
 				var e1 = enemyScene.Instantiate<EnemyBase>();
 				var e2 = enemyScene.Instantiate<EnemyBase>();
-				e2.Position = new Vector2(e2.Position.X + 1, e2.Position.Y + 1);
 				GetTree().CurrentScene.AddChild(e1);
 				GetTree().CurrentScene.AddChild(e2);
+				e1.GlobalPosition = enemy.GlobalPosition + new Vector2(-8, 0);
+				e2.GlobalPosition = enemy.GlobalPosition + new Vector2(8, 0);
 				enemy.QueueFree();
 			}
 			else

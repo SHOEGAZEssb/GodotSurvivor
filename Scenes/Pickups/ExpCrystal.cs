@@ -16,7 +16,7 @@ namespace GodotSurvivor.Scenes.Pickups
 
 		protected override void OnPickup(PlayerController player)
 		{
-			player.PlayerStats.CurrentExperience += Experience;
+			player.PlayerStats.GainExperience(Experience);
 			QueueFree();
 		}
 	}

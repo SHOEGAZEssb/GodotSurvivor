@@ -23,6 +23,7 @@ namespace GodotSurvivor.Scenes.UI
 		{
 			MinValue = 0;
 			MaxValue = Stats.CurrentStats.MaxHP;
+			Value = Stats.CurrentStats.CurrentHP;
 			Stats.CurrentStats.CurrentHPChanged += OnPlayerHPChanged;
 			Stats.CurrentStats.MaxHPChanged += OnPlayerMaxHPChanged;
 			UpdateLabel();

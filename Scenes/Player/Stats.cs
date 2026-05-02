@@ -135,16 +135,17 @@ namespace GodotSurvivor.Scenes.Player
 			get => _currentExperience;
 			set
 			{
-				_currentExperience = (int)Math.Ceiling(value * ExperienceGainMultiplier);
-				EmitSignal(SignalName.ExpGained);
-				while (CurrentExperience >= ExperienceToNextLevel)
-				{
-					ExperienceToNextLevel = (int)Math.Ceiling(ExperienceToNextLevel * 1.3);
-					Level += 1;
-				}
+				_currentExperience = value;
+				OnExperienceChanged();
 			}
 		}
 		private int _currentExperience = 0;
+
+		public void GainExperience(int amount)
+		{
+			_currentExperience += (int)Math.Ceiling(amount * ExperienceGainMultiplier);
+			OnExperienceChanged();
+		}
 
 		[Export]
 		public float ExperienceGainMultiplier
@@ -270,6 +271,16 @@ namespace GodotSurvivor.Scenes.Player
 				new("", "+10% Max HP", UpgradeType.Player, new Action(() => MaxHPMultiplier += 0.1f)),
 				new("", "+10% Pickup Range", UpgradeType.Player, new Action(() => PickupRadiusMultiplier += 0.5f))
 			};
+		}
+
+		private void OnExperienceChanged()
+		{
+			EmitSignal(SignalName.ExpGained);
+			while (CurrentExperience >= ExperienceToNextLevel)
+			{
+				ExperienceToNextLevel = (int)Math.Ceiling(ExperienceToNextLevel * 1.3);
+				Level += 1;
+			}
 		}
 
 		private static List<PackedScene> CreateItemPool()

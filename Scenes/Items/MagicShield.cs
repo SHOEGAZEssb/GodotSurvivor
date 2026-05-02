@@ -71,7 +71,7 @@ namespace GodotSurvivor.Scenes.Items
 			get => _delayMultiplier;
 			set
 			{
-				_delayMultiplier = value;
+				_delayMultiplier = Math.Max(0.1f, value);
 				_delayTimer.WaitTime = Delay;
 			}
 		}

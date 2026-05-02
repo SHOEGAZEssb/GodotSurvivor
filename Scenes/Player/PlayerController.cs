@@ -20,7 +20,7 @@ namespace GodotSurvivor.Scenes.Player
 		/// <summary>
 		/// Currently equipped weapon.
 		/// </summary>
-		public WeaponBase CurrentWeapon => _pistol;
+		public WeaponBase CurrentWeapon => _currentWeapon;
 
 		public string OnTakeDamageSignalName => SignalName.OnTakeDamage;
 
@@ -34,8 +34,8 @@ namespace GodotSurvivor.Scenes.Player
 
 		private AnimatedSprite2D _sprite;
 		private Node2D _weaponPosition;
-		private PackedScene _pistolScene;
-		private WeaponBase _pistol;
+		private PackedScene _weaponScene;
+		private WeaponBase _currentWeapon;
 		private ItemPickupRange _pickupRange;
 		private Timer _invincibilityTimer;
 
@@ -48,24 +48,22 @@ namespace GodotSurvivor.Scenes.Player
 
 			// get weapons
 			_weaponPosition = GetNode<Node2D>("Weapon");
-			_pistolScene = ResourceLoader.Load<PackedScene>("res://Scenes/Weapons/Flamethrower.tscn");
+			_weaponScene = ResourceLoader.Load<PackedScene>("res://Scenes/Weapons/Flamethrower.tscn");
 
-			_pistol = _pistolScene.Instantiate<WeaponBase>();
-			_pistol.Position = _weaponPosition.Position;
-			AddChild(_pistol);
-			_pistol.Owner = Owner;
+			_currentWeapon = _weaponScene.Instantiate<WeaponBase>();
+			_currentWeapon.Position = _weaponPosition.Position;
+			AddChild(_currentWeapon);
+			_currentWeapon.Owner = Owner;
 
 			_invincibilityTimer = GetNode<Timer>("InvincibilityTimer");
 
 			_pickupRange = GetNode<ItemPickupRange>("ItemPickupRange");
 			_pickupRange.PickupRadius = PlayerStats.PickupRadius;
+			PlayerStats.PickupRadiusChanged += OnPickupRadiusChanged;
 		}
 
 		public override void _PhysicsProcess(double delta)
 		{
-			if (Input.IsKeyPressed(Key.Shift))
-				PlayerStats.CurrentExperience = PlayerStats.ExperienceToNextLevel;
-
 			var velocity = GetInput();
 			AnimatePlayer(velocity);
 			Position += velocity * (float)delta;
@@ -132,6 +130,11 @@ namespace GodotSurvivor.Scenes.Player
 				else if (_sprite.Animation == "walk_left")
 					_sprite.Play("idle_left");
 			}
+		}
+
+		private void OnPickupRadiusChanged()
+		{
+			_pickupRange.PickupRadius = PlayerStats.PickupRadius;
 		}
 	}
 }

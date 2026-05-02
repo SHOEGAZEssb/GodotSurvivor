@@ -30,7 +30,7 @@ namespace GodotSurvivor.Scenes.Items
 			get => _delayMultiplier;
 			set
 			{
-				_delayMultiplier = value;
+				_delayMultiplier = Math.Max(0.1f, value);
 				_delayTimer.WaitTime = Delay;
 			}
 		}
@@ -110,6 +110,7 @@ namespace GodotSurvivor.Scenes.Items
 		private readonly IDictionary<string, (PackedScene statusScene, float chance)> _applyableStatuses = new Dictionary<string, (PackedScene statusScene, float chance)>();
 
 		private PackedScene _shovelHoleScene;
+		private PlayerController _player;
 
 		#endregion Properties
 
@@ -117,10 +118,10 @@ namespace GodotSurvivor.Scenes.Items
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
 		{
-			var player = GetTree().CurrentScene.GetNode<PlayerController>("Player");
+			_player = GetTree().CurrentScene.GetNode<PlayerController>("Player");
 			GetParent().RemoveChild(this);
-			player.AddChild(this);
-			player.PlayerStats.Items.Add(this);
+			_player.AddChild(this);
+			_player.PlayerStats.Items.Add(this);
 
 			AvailableUpgrades = CreateUpgrades();
 
@@ -145,6 +146,7 @@ namespace GodotSurvivor.Scenes.Items
 				hole.Damage = Damage;
 				hole.ApplyableStatuses = ApplyableStatuses;
 				hole.Treasure = GetTreasure();
+				hole.Source = this;
 
 				var sprite = new Sprite2D
 				{
@@ -173,9 +175,15 @@ namespace GodotSurvivor.Scenes.Items
 
 		private Vector2 GetRandomPosition()
 		{
-			// todo: I think this doesnt work correctly yet
 			var screenSize = GetViewport().GetVisibleRect().Size;
-			return new Vector2(GD.Randi() % screenSize.X, GD.Randi() % screenSize.Y);
+			var camera = GetViewport().GetCamera2D();
+			var zoom = camera != null ? camera.Zoom : Vector2.One;
+			var worldSize = screenSize / zoom;
+			var offset = new Vector2(
+				(float)GD.RandRange(-worldSize.X / 2, worldSize.X / 2),
+				(float)GD.RandRange(-worldSize.Y / 2, worldSize.Y / 2));
+
+			return _player.GlobalPosition + offset;
 		}
 
 		private Node2D GetTreasure()
