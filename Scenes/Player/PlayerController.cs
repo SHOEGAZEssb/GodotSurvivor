@@ -1,4 +1,5 @@
 using Godot;
+using GodotSurvivor.Scenes;
 using GodotSurvivor.Scenes.Pickups;
 using GodotSurvivor.Scenes.Weapons;
 
@@ -48,7 +49,10 @@ namespace GodotSurvivor.Scenes.Player
 
 			// get weapons
 			_weaponPosition = GetNode<Node2D>("Weapon");
-			_weaponScene = ResourceLoader.Load<PackedScene>("res://Scenes/Weapons/Flamethrower.tscn");
+			var weaponScenePath = ResourceLoader.Exists(GameSession.SelectedWeaponScenePath)
+				? GameSession.SelectedWeaponScenePath
+				: GameSession.DefaultWeaponScenePath;
+			_weaponScene = ResourceLoader.Load<PackedScene>(weaponScenePath);
 
 			_currentWeapon = _weaponScene.Instantiate<WeaponBase>();
 			_currentWeapon.Position = _weaponPosition.Position;

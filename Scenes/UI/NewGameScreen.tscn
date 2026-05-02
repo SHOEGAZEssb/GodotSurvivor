@@ -1,0 +1,163 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://Scenes/UI/NewGameScreen.cs" id="1_dxpah"]
+[ext_resource type="Texture2D" uid="uid://d1jrd1o1xa1a2" path="res://Sprites/Weapons/Flamethrower.png" id="2_yr4am"]
+[ext_resource type="Texture2D" uid="uid://b3tvqg3wpuwhh" path="res://Sprites/Weapons/gun.png" id="3_gwrkp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_weapon_panel"]
+bg_color = Color(0.121, 0.133, 0.158, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.28, 0.31, 0.36, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 18.0
+content_margin_top = 18.0
+content_margin_right = 18.0
+content_margin_bottom = 18.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_background"]
+bg_color = Color(0.064, 0.071, 0.087, 1)
+
+[node name="NewGameScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dxpah")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_background")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 36
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 36
+theme_override_constants/margin_bottom = 28
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 22
+
+[node name="Header" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Choose Your Weapon"
+horizontal_alignment = 1
+
+[node name="Weapons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="FlamethrowerPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/Weapons"]
+custom_minimum_size = Vector2(260, 280)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_weapon_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Weapons/FlamethrowerPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Weapons/FlamethrowerPanel/VBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_yr4am")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/Weapons/FlamethrowerPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Flamethrower"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer/Weapons/FlamethrowerPanel/VBoxContainer"]
+layout_mode = 2
+text = "A close-range stream of fire."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="FlamethrowerButton" type="Button" parent="MarginContainer/VBoxContainer/Weapons/FlamethrowerPanel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Select"
+
+[node name="PistolPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/Weapons"]
+custom_minimum_size = Vector2(260, 280)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_weapon_panel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/Weapons/PistolPanel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/Weapons/PistolPanel/VBoxContainer"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("3_gwrkp")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/Weapons/PistolPanel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Pistol"
+horizontal_alignment = 1
+
+[node name="Description" type="Label" parent="MarginContainer/VBoxContainer/Weapons/PistolPanel/VBoxContainer"]
+layout_mode = 2
+text = "A precise ranged shot."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PistolButton" type="Button" parent="MarginContainer/VBoxContainer/Weapons/PistolPanel/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Select"
+
+[node name="Actions" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 52)
+layout_mode = 2
+text = "Back"
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/Actions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 52)
+layout_mode = 2
+text = "Start with Flamethrower"
