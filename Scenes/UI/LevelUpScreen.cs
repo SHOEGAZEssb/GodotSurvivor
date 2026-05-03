@@ -10,17 +10,18 @@ namespace GodotSurvivor.Scenes.UI
 	/// </summary>
 	public partial class LevelUpScreen : Control
 	{
+		[Signal]
+		public delegate void UpgradeChosenEventHandler();
+
 		private VBoxContainer _buttonContainer;
 		private PackedScene _buttonScene;
-		private PlayerController _player;
 
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
 		{
 			GetTree().Paused = true;
-			_buttonContainer = GetNode<VBoxContainer>("VBoxContainer");
+			_buttonContainer = GetNode<VBoxContainer>("%ChoiceList");
 			_buttonScene = ResourceLoader.Load<PackedScene>("res://Scenes/UI/UpgradeButton.tscn");
-			_player = GetTree().CurrentScene.GetNode<PlayerController>("Player");
 
 			var upgrades = Stats.CurrentStats.AvailableUpgrades.GetRandomListItems(5);
 			foreach (var upgrade in upgrades)
@@ -34,7 +35,7 @@ namespace GodotSurvivor.Scenes.UI
 
 		private void OnUpgradeApplied()
 		{
-			GetTree().Paused = false;
+			EmitSignal(SignalName.UpgradeChosen);
 			QueueFree();
 		}
 	}

@@ -29,6 +29,11 @@ namespace GodotSurvivor.Scenes.Player
 	public class Upgrade
 	{
 		/// <summary>
+		/// Stable identifier for tracking chosen stacks.
+		/// </summary>
+		public string Id { get; }
+
+		/// <summary>
 		/// Name of the upgrade.
 		/// </summary>
 		public string Name { get; }
@@ -44,15 +49,30 @@ namespace GodotSurvivor.Scenes.Player
 		public UpgradeType Type { get; }
 
 		/// <summary>
+		/// Name of the player, item, or weapon affected by this upgrade.
+		/// </summary>
+		public string TargetName { get; }
+
+		/// <summary>
+		/// Optional texture path for the affected target.
+		/// </summary>
+		public string TargetTexturePath { get; }
+
+		/// <summary>
 		/// If the upgrade is unique, meaning it can only be picked once.
 		/// </summary>
-		public bool Unique { get; }
+		public bool Unique => MaxStacks == 1;
+
+		/// <summary>
+		/// Maximum amount of times this upgrade can be chosen.
+		/// </summary>
+		public int MaxStacks { get; }
 
 		/// <summary>
 		/// If this upgrade can be applied, meaning it can appear
 		/// in the level up screen.
 		/// </summary>
-		public bool IsApplicable => _isApplicable?.Invoke() ?? true;
+		public bool IsApplicable => (_isApplicable?.Invoke() ?? true) && Stats.CurrentStats.GetUpgradeStackCount(Id) < MaxStacks;
 		private readonly Func<bool> _isApplicable;
 
 		private readonly Action _upgradeAction;
@@ -63,18 +83,23 @@ namespace GodotSurvivor.Scenes.Player
 		/// <param name="name">Name of the upgrade.</param>
 		/// <param name="description">Description of the upgrade.</param>
 		/// <param name="type">Type of the upgrade.</param>
+		/// <param name="targetName">Name of the player, item, or weapon affected by this upgrade.</param>
 		/// <param name="upgradeAction">The effect of the upgrade.</param>
 		/// <param name="isApplicable">If this upgrade can be applied, meaning it can appear in the level up screen.
 		/// Pass null if no check is needed.</param>
-		/// <param name="unique">If the upgrade is unique, meaning it can only be picked once.</param>
-		public Upgrade(string name, string description, UpgradeType type, Action upgradeAction, Func<bool> isApplicable = null, bool unique = false)
+		/// <param name="maxStacks">Maximum amount of times this upgrade can be chosen.</param>
+		/// <param name="targetTexturePath">Optional texture path for the affected target.</param>
+		public Upgrade(string id, string name, string description, UpgradeType type, string targetName, Action upgradeAction, Func<bool> isApplicable = null, int maxStacks = int.MaxValue, string targetTexturePath = null)
 		{
+			Id = id;
 			Name = name;
 			Description = description;
 			Type = type;
+			TargetName = targetName;
+			TargetTexturePath = targetTexturePath;
 			_upgradeAction = upgradeAction;
 			_isApplicable = isApplicable;
-			Unique = unique;
+			MaxStacks = maxStacks;
 		}
 
 		/// <summary>
@@ -83,7 +108,7 @@ namespace GodotSurvivor.Scenes.Player
 		public void OnChosen()
 		{
 			_upgradeAction.Invoke();
-			Stats.CurrentStats.ChosenUpgrades.Add(this);
+			Stats.CurrentStats.RecordChosenUpgrade(this);
 		}
 	}
 }

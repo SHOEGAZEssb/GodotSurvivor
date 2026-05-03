@@ -131,10 +131,10 @@ namespace GodotSurvivor.Scenes.Items
 		{
 			return new List<Upgrade>()
 			{
-				new("", "-10% Attack Delay", UpgradeType.Ability, () => DelayMultiplier -= 0.1f),
-				new("", "+20% Damage", UpgradeType.Ability, () => DamageMultiplier += 0.2f),
-				new("", "+15% Size", UpgradeType.Ability, () => SizeMultiplier += 0.15f),
-				new("", "50% Chance to apply Burning", UpgradeType.Ability, () => this.AddApplyableStatus(nameof(Burning), 0.5f, Burning.CreateCustomPackedScene(1, 1f)), null, true)
+				new("magic_shield.attack_delay", "Attack Delay", "-10% Attack Delay", UpgradeType.Ability, Metadata.Name, () => DelayMultiplier -= 0.1f, targetTexturePath: Metadata.TexturePath),
+				new("magic_shield.damage", "Damage", "+20% Damage", UpgradeType.Ability, Metadata.Name, () => DamageMultiplier += 0.2f, targetTexturePath: Metadata.TexturePath),
+				new("magic_shield.size", "Size", "+15% Size", UpgradeType.Ability, Metadata.Name, () => SizeMultiplier += 0.15f, targetTexturePath: Metadata.TexturePath),
+				new("magic_shield.burning", "Burning", "50% Chance to apply Burning", UpgradeType.Ability, Metadata.Name, () => this.AddApplyableStatus(nameof(Burning), 0.5f, Burning.CreateCustomPackedScene(1, 1f)), null, 1, Metadata.TexturePath)
 			};
 		}
 	}

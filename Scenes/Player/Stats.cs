@@ -180,6 +180,17 @@ namespace GodotSurvivor.Scenes.Player
 		[Signal]
 		public delegate void LevelChangedEventHandler();
 
+		public int PendingLevelUps { get; private set; } = 0;
+
+		public bool ConsumePendingLevelUp()
+		{
+			if (PendingLevelUps <= 0)
+				return false;
+
+			PendingLevelUps--;
+			return true;
+		}
+
 		#endregion Experience / Level
 
 		#region Upgrades
@@ -192,12 +203,27 @@ namespace GodotSurvivor.Scenes.Player
 				foreach (var ability in Items.OfType<IAbility>())
 					list = list.Concat(ability.AvailableUpgrades);
 
-				return list.Where(u => u.IsApplicable && !(u.Unique && ChosenUpgrades.Contains(u))).ToList();
+				return list.Where(u => u.IsApplicable).ToList();
 			}
 		}
 		private readonly List<Upgrade> _availablePlayerUpgrades;
 
 		public List<Upgrade> ChosenUpgrades { get; } = new List<Upgrade>();
+		private readonly Dictionary<string, int> _chosenUpgradeStacks = new();
+
+		public int GetUpgradeStackCount(string upgradeId)
+		{
+			return _chosenUpgradeStacks.TryGetValue(upgradeId, out int stacks) ? stacks : 0;
+		}
+
+		public void RecordChosenUpgrade(Upgrade upgrade)
+		{
+			if (!_chosenUpgradeStacks.ContainsKey(upgrade.Id))
+				_chosenUpgradeStacks[upgrade.Id] = 0;
+
+			_chosenUpgradeStacks[upgrade.Id]++;
+			ChosenUpgrades.Add(upgrade);
+		}
 
 		#endregion Upgrades
 
@@ -271,19 +297,26 @@ namespace GodotSurvivor.Scenes.Player
 		{
 			return new List<Upgrade>()
 			{
-				new("", "+10% Max HP", UpgradeType.Player, new Action(() => MaxHPMultiplier += 0.1f)),
-				new("", "+10% Pickup Range", UpgradeType.Player, new Action(() => PickupRadiusMultiplier += 0.5f))
+				new("player.max_hp", "Max HP", "+10% Max HP", UpgradeType.Player, "Player", new Action(() => MaxHPMultiplier += 0.1f), targetTexturePath: "res://Sprites/Player/_down idle.png"),
+				new("player.pickup_range", "Pickup Range", "+50% Pickup Range", UpgradeType.Player, "Player", new Action(() => PickupRadiusMultiplier += 0.5f), targetTexturePath: "res://Sprites/Player/_down idle.png")
 			};
 		}
 
 		private void OnExperienceChanged()
 		{
 			EmitSignal(SignalName.ExpGained);
+			bool gainedLevel = false;
 			while (CurrentExperience >= ExperienceToNextLevel)
 			{
+				_currentExperience -= ExperienceToNextLevel;
 				ExperienceToNextLevel = (int)Math.Ceiling(ExperienceToNextLevel * 1.3);
+				PendingLevelUps++;
 				Level += 1;
+				gainedLevel = true;
 			}
+
+			if (gainedLevel)
+				EmitSignal(SignalName.ExpGained);
 		}
 
 		private static List<PackedScene> CreateItemPool()

@@ -1,11 +1,156 @@
-[gd_scene load_steps=2 format=3 uid="uid://ckq14u3n4l4xh"]
+[gd_scene load_steps=6 format=3 uid="uid://ckq14u3n4l4xh"]
 
 [ext_resource type="Script" path="res://Scenes/UI/UpgradeButton.cs" id="1_ru58v"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_normal"]
+bg_color = Color(0.13, 0.145, 0.17, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.32, 0.35, 0.4, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
+bg_color = Color(0.18, 0.205, 0.235, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.78, 0.68, 0.36, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
+bg_color = Color(0.1, 0.115, 0.14, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.86, 0.76, 0.42, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+content_margin_left = 18.0
+content_margin_top = 14.0
+content_margin_right = 18.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_focus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9, 0.78, 0.42, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="UpgradeButton" type="Button"]
 process_mode = 3
-offset_right = 8.0
-offset_bottom = 8.0
+custom_minimum_size = Vector2(520, 108)
+offset_right = 520.0
+offset_bottom = 108.0
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 1, 1, 0)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 0)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0)
+theme_override_styles/normal = SubResource("StyleBoxFlat_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+theme_override_styles/focus = SubResource("StyleBoxFlat_focus")
 script = ExtResource("1_ru58v")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 14
+
+[node name="Content" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+alignment = 1
+
+[node name="TargetIcon" type="TextureRect" parent="MarginContainer/Content"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TextContent" type="VBoxContainer" parent="MarginContainer/Content"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/separation = 5
+
+[node name="TopRow" type="HBoxContainer" parent="MarginContainer/Content/TextContent"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="TargetLabel" type="Label" parent="MarginContainer/Content/TextContent/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.9, 0.78, 0.42, 1)
+theme_override_font_sizes/font_size = 15
+text = "Target"
+text_overrun_behavior = 3
+
+[node name="StackLabel" type="Label" parent="MarginContainer/Content/TextContent/TopRow"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.68, 0.72, 0.78, 1)
+theme_override_font_sizes/font_size = 14
+text = "Stack 1"
+horizontal_alignment = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/Content/TextContent"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.97, 0.98, 1)
+theme_override_font_sizes/font_size = 24
+text = "Upgrade"
+text_overrun_behavior = 3
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/Content/TextContent"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.76, 0.8, 0.86, 1)
+theme_override_font_sizes/font_size = 16
+text = "Description"
+autowrap_mode = 3
 
 [connection signal="pressed" from="." to="." method="OnButtonPressed"]

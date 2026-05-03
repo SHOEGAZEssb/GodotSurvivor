@@ -11,6 +11,7 @@ namespace GodotSurvivor.Scenes.UI
 		private Label _label;
 		private PackedScene _levelUpScreenScene;
 		private CanvasLayer _parentCanvas;
+		private bool _levelUpScreenOpen = false;
 
 		// Called when the node enters the scene tree for the first time.
 		public override void _Ready()
@@ -43,11 +44,34 @@ namespace GodotSurvivor.Scenes.UI
 
 		private void OnPlayerLevelGained()
 		{
-			MinValue = Stats.CurrentStats.CurrentExperience;
+			MinValue = 0;
 			MaxValue = Stats.CurrentStats.ExperienceToNextLevel;
 
-			_parentCanvas.AddChild(_levelUpScreenScene.Instantiate());
+			TryShowLevelUpScreen();
 			UpdateLabel();
+		}
+
+		private void TryShowLevelUpScreen()
+		{
+			if (_levelUpScreenOpen || !Stats.CurrentStats.ConsumePendingLevelUp())
+				return;
+
+			_levelUpScreenOpen = true;
+			GetTree().Paused = true;
+
+			var levelUpScreen = _levelUpScreenScene.Instantiate<LevelUpScreen>();
+			levelUpScreen.UpgradeChosen += OnUpgradeChosen;
+			_parentCanvas.AddChild(levelUpScreen);
+		}
+
+		private void OnUpgradeChosen()
+		{
+			_levelUpScreenOpen = false;
+
+			if (Stats.CurrentStats.PendingLevelUps > 0)
+				TryShowLevelUpScreen();
+			else
+				GetTree().Paused = false;
 		}
 
 		private void UpdateLabel()

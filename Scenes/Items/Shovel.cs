@@ -174,7 +174,7 @@ namespace GodotSurvivor.Scenes.Items
 		{
 			return new List<Upgrade>()
 			{
-				new("", "50% chance to apply Slow", UpgradeType.Ability, new Action(() => this.AddApplyableStatus(nameof(Slow), 0.5f, Slow.CreateCustomPackedScene(0.3f, 5f))), null, true)
+				new("shovel.slow", "Slow", "50% chance to apply Slow", UpgradeType.Ability, Metadata.Name, new Action(() => this.AddApplyableStatus(nameof(Slow), 0.5f, Slow.CreateCustomPackedScene(0.3f, 5f))), null, 1, Metadata.TexturePath)
 			};
 		}
 
