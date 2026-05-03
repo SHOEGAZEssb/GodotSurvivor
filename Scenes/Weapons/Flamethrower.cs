@@ -1,14 +1,12 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GodotSurvivor.Scenes.Collectibles;
 
 namespace GodotSurvivor.Scenes.Weapons
 {
 	public partial class Flamethrower : WeaponBase
 	{
+		public override string CollectibleId => CollectibleIds.Flamethrower;
+
 		private PackedScene _bulletScene;
 
 		public override void _Ready()
@@ -20,6 +18,7 @@ namespace GodotSurvivor.Scenes.Weapons
 		protected override void Shoot()
 		{
 			var bullet = _bulletScene.Instantiate<FlamethrowerBullet>();
+			bullet.CollectibleId = CollectibleId;
 			Owner.AddChild(bullet);
 			bullet.GlobalPosition = GlobalPosition;
 			bullet.GlobalRotation = GlobalRotation;

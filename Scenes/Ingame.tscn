@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://qnmu8f6lncoe"]
+[gd_scene load_steps=10 format=3 uid="uid://qnmu8f6lncoe"]
 
 [ext_resource type="PackedScene" uid="uid://vd3s1vu86sce" path="res://Scenes/Player/Player.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://Scenes/Enemies/EnemySpawner.tscn" id="3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bknqj7o8posen" path="res://Sprites/Map/Tileset Grass.png" id="5"]
 [ext_resource type="PackedScene" uid="uid://cj7w1pjft588q" path="res://Scenes/Pickups/ItemVacuum.tscn" id="6_u18cv"]
 [ext_resource type="PackedScene" uid="uid://bkkshlddufttv" path="res://Scenes/Pickups/Chest.tscn" id="7_03cbp"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/PauseMenu.tscn" id="8_pause"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ar68"]
 texture = ExtResource("5")
@@ -377,6 +378,16 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 1
 size_flags_vertical = 1
+
+[node name="PauseMenu" parent="Player/Camera2D/CanvasLayer" instance=ExtResource("8_pause")]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="EnemySpawner" parent="." instance=ExtResource("3")]
 

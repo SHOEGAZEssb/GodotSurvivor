@@ -1,4 +1,5 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Pickups;
 using GodotSurvivor.Scenes.Player;
@@ -104,7 +105,9 @@ namespace GodotSurvivor.Scenes.Items
 
 		public List<Upgrade> AvailableUpgrades { get; private set; }
 
-		public ItemData Metadata => new("Shovel", "Can dig up treasure and damage enemies", "res://Sprites/Items/MagicShieldIcon.png");
+		public string CollectibleId => CollectibleIds.Shovel;
+
+		public ItemData Metadata => new("Shovel", "Can dig up treasure and damage enemies", "res://Sprites/Items/Shovel.png");
 
 		public IDictionary<string, (PackedScene statusScene, float chance)> ApplyableStatuses => _applyableStatuses;
 		private readonly IDictionary<string, (PackedScene statusScene, float chance)> _applyableStatuses = new Dictionary<string, (PackedScene statusScene, float chance)>();
@@ -122,6 +125,7 @@ namespace GodotSurvivor.Scenes.Items
 			GetParent().RemoveChild(this);
 			_player.AddChild(this);
 			_player.PlayerStats.Items.Add(this);
+			CollectibleStatTracker.RecordUnlock(CollectibleId);
 
 			AvailableUpgrades = CreateUpgrades();
 
@@ -138,6 +142,7 @@ namespace GodotSurvivor.Scenes.Items
 		{
 			if (_delayTimer.IsStopped())
 			{
+				CollectibleStatTracker.RecordUse(CollectibleId);
 				var randomPos = GetRandomPosition();
 
 				var hole = _shovelHoleScene.Instantiate<ShovelHole>();

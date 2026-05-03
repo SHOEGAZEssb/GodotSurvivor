@@ -1,4 +1,5 @@
 ﻿using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Items;
 using System;
 using System.Collections.Generic;
@@ -251,6 +252,7 @@ namespace GodotSurvivor.Scenes.Player
 
 		public void OnEnemyDamaged(DamageInfo damageInfo)
 		{
+			CollectibleStatTracker.RecordDamage(damageInfo);
 			EnemyDamagedEventHandler?.Invoke(this, damageInfo);
 		}
 
@@ -259,6 +261,7 @@ namespace GodotSurvivor.Scenes.Player
 		public void OnEnemyKilled(DamageInfo damageInfo)
 		{
 			NumKilledEnemies++;
+			CollectibleStatTracker.RecordKill(damageInfo);
 			EnemyKilledEventHandler?.Invoke(this, damageInfo);
 		}
 

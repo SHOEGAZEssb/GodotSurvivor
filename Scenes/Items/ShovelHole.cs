@@ -1,4 +1,5 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Player;
 using GodotSurvivor.Scenes.Statuses;
@@ -49,6 +50,7 @@ namespace GodotSurvivor.Scenes.Items
 				{
 					Treasure.Position = GlobalPosition;
 					GetTree().CurrentScene.AddChild(Treasure);
+					CollectibleStatTracker.RecordCustom(Source.CollectibleId, CollectibleStatKeys.TreasureDugUp);
 				}
 
 				// damage enemies

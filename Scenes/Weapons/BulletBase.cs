@@ -1,11 +1,14 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Player;
 
 namespace GodotSurvivor.Scenes.Weapons
 {
-	public partial class BulletBase : Area2D
+	public partial class BulletBase : Area2D, ICollectibleStatSource
 	{
+		public string CollectibleId { get; set; }
+
 		[Export]
 		public int BaseDamage = 10;
 

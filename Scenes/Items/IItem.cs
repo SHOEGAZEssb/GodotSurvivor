@@ -1,9 +1,11 @@
-﻿namespace GodotSurvivor.Scenes.Items
+using GodotSurvivor.Scenes.Collectibles;
+
+namespace GodotSurvivor.Scenes.Items
 {
 	/// <summary>
 	/// Interface for items (abilities, trinkets).
 	/// </summary>
-	public interface IItem
+	public interface IItem : ICollectibleStatSource
 	{
 		/// <summary>
 		/// Info about this item.

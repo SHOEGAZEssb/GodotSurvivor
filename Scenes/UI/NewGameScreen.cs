@@ -1,5 +1,6 @@
 using Godot;
 using GodotSurvivor.Scenes;
+using GodotSurvivor.Scenes.Collectibles;
 
 namespace GodotSurvivor.Scenes.UI
 {
@@ -31,6 +32,7 @@ namespace GodotSurvivor.Scenes.UI
 		private void OnStartPressed()
 		{
 			GameSession.SelectedWeaponScenePath = _selectedWeaponScenePath;
+			CollectibleStatTracker.RecordUnlock(GameSession.GetWeaponCollectibleId(_selectedWeaponScenePath));
 			GetTree().ChangeSceneToFile("res://Scenes/Ingame.tscn");
 		}
 

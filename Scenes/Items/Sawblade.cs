@@ -1,4 +1,5 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Enemies;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Player;
@@ -14,6 +15,8 @@ namespace GodotSurvivor.Scenes.Items
 	public partial class Sawblade : Node2D, IAbility
 	{
 		#region Properties
+
+		public string CollectibleId => CollectibleIds.Sawblade;
 
 		public ItemData Metadata => new("Sawblade", "Rotates around the player and damages enemies", "res://Sprites/Placeholder.png");
 
@@ -146,6 +149,7 @@ namespace GodotSurvivor.Scenes.Items
 			GetParent().RemoveChild(this);
 			player.AddChild(this);
 			player.PlayerStats.Items.Add(this);
+			CollectibleStatTracker.RecordUnlock(CollectibleId);
 
 			_sawbladePartScene = ResourceLoader.Load<PackedScene>("res://Scenes/Items/SawbladePart.tscn");
 			UpdateSawbladeParts();
@@ -198,6 +202,7 @@ namespace GodotSurvivor.Scenes.Items
 
 		private void Part_OnEnemyHit(object sender, IDamageableByPlayer e)
 		{
+			CollectibleStatTracker.RecordUse(CollectibleId);
 			if (_dividerUpgradeActive && RandomHelper.HitRandomChance(0.01f) && e is EnemyBase enemy)
 			{
 				// scale enemy down

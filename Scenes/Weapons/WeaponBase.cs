@@ -1,9 +1,12 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 
 namespace GodotSurvivor.Scenes.Weapons
 {
-	public partial class WeaponBase : Sprite2D
+	public partial class WeaponBase : Sprite2D, ICollectibleStatSource
 	{
+		public virtual string CollectibleId => CollectibleIds.Flamethrower;
+
 		[Export]
 		public float BaseDelay = 3f;
 
@@ -36,6 +39,7 @@ namespace GodotSurvivor.Scenes.Weapons
 			if (_timer.IsStopped() && Input.IsActionPressed("shoot"))
 			{
 				_timer.Start();
+				CollectibleStatTracker.RecordUse(CollectibleId);
 				Shoot();
 			}
 		}

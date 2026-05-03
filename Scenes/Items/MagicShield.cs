@@ -1,4 +1,5 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Player;
 using GodotSurvivor.Scenes.Statuses;
@@ -11,6 +12,8 @@ namespace GodotSurvivor.Scenes.Items
 	public partial class MagicShield : Area2D, IAbility
 	{
 		#region Properties
+
+		public string CollectibleId => CollectibleIds.MagicShield;
 
 		public ItemData Metadata => new("Magic Shield", "Periodically damages enemies in its range", "res://Sprites/Items/MagicShieldIcon.png");
 
@@ -100,6 +103,7 @@ namespace GodotSurvivor.Scenes.Items
 			GetParent().RemoveChild(this);
 			player.AddChild(this);
 			player.PlayerStats.Items.Add(this);
+			CollectibleStatTracker.RecordUnlock(CollectibleId);
 
 			AvailableUpgrades = CreateUpgrades();
 			_delayTimer = GetNode<Timer>("DelayTimer");
@@ -111,6 +115,7 @@ namespace GodotSurvivor.Scenes.Items
 		{
 			if (_delayTimer.IsStopped())
 			{
+				CollectibleStatTracker.RecordUse(CollectibleId);
 				var enemies = GetOverlappingBodies().OfType<IDamageableByPlayer>();
 				foreach (var enemy in enemies)
 				{

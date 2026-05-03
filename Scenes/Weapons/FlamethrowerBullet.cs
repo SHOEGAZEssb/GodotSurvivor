@@ -1,4 +1,5 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Helper;
 using GodotSurvivor.Scenes.Player;
 using GodotSurvivor.Scenes.Statuses;
@@ -10,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace GodotSurvivor.Scenes.Weapons
 {
-	public partial class FlamethrowerBullet : Area2D, ICanApplyStatuses
+	public partial class FlamethrowerBullet : Area2D, ICanApplyStatuses, ICollectibleStatSource
 	{
+		public string CollectibleId { get; set; }
+
 		[Export]
 		public float InitialSpeed = 200f;
 		private float _currentSpeed;

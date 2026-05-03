@@ -1,9 +1,12 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 
 namespace GodotSurvivor.Scenes.Weapons
 {
 	public partial class Pistol : WeaponBase
 	{
+		public override string CollectibleId => CollectibleIds.Pistol;
+
 		private PackedScene _bulletScene;
 
 		// Called when the node enters the scene tree for the first time.
@@ -16,6 +19,7 @@ namespace GodotSurvivor.Scenes.Weapons
 		protected override void Shoot()
 		{
 			var bullet = _bulletScene.Instantiate<GunBullet>();
+			bullet.CollectibleId = CollectibleId;
 			Owner.AddChild(bullet);
 			bullet.Transform = GlobalTransform;
 		}

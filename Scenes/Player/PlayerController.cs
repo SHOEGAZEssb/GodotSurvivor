@@ -1,5 +1,6 @@
 using Godot;
 using GodotSurvivor.Scenes;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Pickups;
 using GodotSurvivor.Scenes.Weapons;
 
@@ -58,6 +59,7 @@ namespace GodotSurvivor.Scenes.Player
 			_currentWeapon.Position = _weaponPosition.Position;
 			AddChild(_currentWeapon);
 			_currentWeapon.Owner = Owner;
+			CollectibleStatTracker.RecordUnlock(_currentWeapon.CollectibleId);
 
 			_invincibilityTimer = GetNode<Timer>("InvincibilityTimer");
 

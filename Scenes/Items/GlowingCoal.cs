@@ -1,4 +1,5 @@
 using Godot;
+using GodotSurvivor.Scenes.Collectibles;
 using GodotSurvivor.Scenes.Enemies;
 using GodotSurvivor.Scenes.Player;
 
@@ -10,6 +11,8 @@ namespace GodotSurvivor.Scenes.Items
 	/// </summary>
 	public partial class GlowingCoal : Node, IItem
 	{
+		public string CollectibleId => CollectibleIds.GlowingCoal;
+
 		public ItemData Metadata => new("Glowing Coal", "Enemies killed by Burning status drop double exp", "res://Sprites/Placeholder.png");
 
 		public override void _Ready()
@@ -18,6 +21,7 @@ namespace GodotSurvivor.Scenes.Items
 			GetParent().RemoveChild(this);
 			player.AddChild(this);
 			player.PlayerStats.Items.Add(this);
+			CollectibleStatTracker.RecordUnlock(CollectibleId);
 
 			Stats.CurrentStats.EnemyKilledEventHandler += CurrentStats_EnemyKilledEventHandler;
 		}
@@ -27,7 +31,12 @@ namespace GodotSurvivor.Scenes.Items
 			if (e.DamageSourceType == DamageSource.Burning)
 			{
 				if (e.Target is EnemyBase enemy)
+				{
 					enemy.ExperienceWorth *= 2;
+					CollectibleStatTracker.RecordUse(CollectibleId);
+					CollectibleStatTracker.RecordCustom(CollectibleId, CollectibleStatKeys.BurningKillsBoosted);
+					CollectibleStatTracker.GainExperience(CollectibleId, 1);
+				}
 			}
 		}
 	}
