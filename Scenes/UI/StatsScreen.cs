@@ -60,6 +60,8 @@ namespace GodotSurvivor.Scenes.UI
 			foreach (var child in _statsList.GetChildren())
 				child.QueueFree();
 
+			AddSectionHeader("Tracked Stats");
+
 			foreach (var statKey in definition.SupportedStats)
 			{
 				var statDefinition = CollectibleCatalog.StatDefinitions.TryGetValue(statKey, out var value)
@@ -71,6 +73,35 @@ namespace GodotSurvivor.Scenes.UI
 					Text = $"{statDefinition.Label}: {stats.GetValue(statKey)}"
 				});
 			}
+
+			AddSectionHeader($"Available Upgrades ({definition.AvailableUpgrades.Count})");
+
+			if (definition.AvailableUpgrades.Count == 0)
+			{
+				_statsList.AddChild(new Label
+				{
+					Text = "No level-up upgrades.",
+					AutowrapMode = TextServer.AutowrapMode.WordSmart
+				});
+				return;
+			}
+
+			foreach (var upgrade in definition.AvailableUpgrades)
+			{
+				bool discovered = stats.PickedUpgradeIds != null && stats.PickedUpgradeIds.Contains(upgrade.Id);
+				string stackInfo = upgrade.MaxStacks == int.MaxValue
+					? "Repeatable"
+					: $"Max {upgrade.MaxStacks}";
+
+				var upgradeLabel = new Label
+				{
+					Text = discovered
+						? $"{upgrade.Name} ({stackInfo}): {upgrade.Description}"
+						: "???",
+					AutowrapMode = TextServer.AutowrapMode.WordSmart
+				};
+				_statsList.AddChild(upgradeLabel);
+			}
 		}
 
 		private void ShowEmptyDetails()
@@ -81,6 +112,18 @@ namespace GodotSurvivor.Scenes.UI
 
 			foreach (var child in _statsList.GetChildren())
 				child.QueueFree();
+		}
+
+		private void AddSectionHeader(string text)
+		{
+			var header = new Label
+			{
+				Text = text,
+				CustomMinimumSize = new Vector2(0, 28)
+			};
+			header.AddThemeFontSizeOverride("font_size", 20);
+			header.AddThemeColorOverride("font_color", new Color(0.9f, 0.78f, 0.42f));
+			_statsList.AddChild(header);
 		}
 
 		private void OnBackPressed()

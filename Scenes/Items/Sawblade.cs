@@ -192,11 +192,11 @@ namespace GodotSurvivor.Scenes.Items
 		{
 			return new List<Upgrade>()
 			{
-				new("sawblade.damage", "Damage", "+10% Damage", UpgradeType.Ability, Metadata.Name, new Action(() => DamageMultiplier += 0.1f), targetTexturePath: Metadata.TexturePath),
-				new("sawblade.amount", "Sawblade", "+1 Sawblade", UpgradeType.Ability, Metadata.Name, new Action(() => Amount += 1), targetTexturePath: Metadata.TexturePath),
-				new("sawblade.rotation_speed", "Rotation Speed", "+15% Rotation Speed", UpgradeType.Ability, Metadata.Name, new Action(() => RotationSpeedMultiplier += 0.15f), targetTexturePath: Metadata.TexturePath),
-				new("sawblade.size", "Size", "+10% Size", UpgradeType.Ability, Metadata.Name, new Action(() => SizeMultiplier += 0.1f), targetTexturePath: Metadata.TexturePath),
-				new("sawblade.divider", "Divider", "Low chance to split enemies in two", UpgradeType.Ability, Metadata.Name, new Action(() => _dividerUpgradeActive = true), null, 1, Metadata.TexturePath),
+				new("sawblade.damage", "Damage", "+10% Damage", UpgradeType.Ability, Metadata.Name, new Action(() => DamageMultiplier += 0.1f), targetTexturePath: Metadata.TexturePath, targetCollectibleId: CollectibleId),
+				new("sawblade.amount", "Sawblade", "+1 Sawblade", UpgradeType.Ability, Metadata.Name, new Action(() => Amount += 1), targetTexturePath: Metadata.TexturePath, targetCollectibleId: CollectibleId),
+				new("sawblade.rotation_speed", "Rotation Speed", "+15% Rotation Speed", UpgradeType.Ability, Metadata.Name, new Action(() => RotationSpeedMultiplier += 0.15f), targetTexturePath: Metadata.TexturePath, targetCollectibleId: CollectibleId),
+				new("sawblade.size", "Size", "+10% Size", UpgradeType.Ability, Metadata.Name, new Action(() => SizeMultiplier += 0.1f), targetTexturePath: Metadata.TexturePath, targetCollectibleId: CollectibleId),
+				new("sawblade.divider", "Divider", "Low chance to split enemies in two", UpgradeType.Ability, Metadata.Name, new Action(() => _dividerUpgradeActive = true), null, 1, Metadata.TexturePath, CollectibleId),
 			};
 		}
 

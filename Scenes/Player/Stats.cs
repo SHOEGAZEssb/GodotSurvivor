@@ -223,6 +223,7 @@ namespace GodotSurvivor.Scenes.Player
 
 			_chosenUpgradeStacks[upgrade.Id]++;
 			ChosenUpgrades.Add(upgrade);
+			CollectibleStatTracker.RecordUpgradeChosen(upgrade.TargetCollectibleId, upgrade.Id);
 		}
 
 		#endregion Upgrades

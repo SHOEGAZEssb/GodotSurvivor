@@ -89,6 +89,21 @@ namespace GodotSurvivor.Scenes.Collectibles
 			Save();
 		}
 
+		public static void RecordUpgradeChosen(string collectibleId, string upgradeId)
+		{
+			if (string.IsNullOrWhiteSpace(collectibleId) || string.IsNullOrWhiteSpace(upgradeId))
+				return;
+
+			var stats = GetStats(collectibleId);
+			stats.Unlocked = true;
+			stats.PickedUpgradeIds ??= new List<string>();
+
+			if (!stats.PickedUpgradeIds.Contains(upgradeId))
+				stats.PickedUpgradeIds.Add(upgradeId);
+
+			Save();
+		}
+
 		public static void RecordHealing(string collectibleId, long amount)
 		{
 			RecordCustom(collectibleId, CollectibleStatKeys.HealingDone, amount);

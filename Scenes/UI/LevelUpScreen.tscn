@@ -53,8 +53,9 @@ grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="CenterContainer"]
 process_mode = 3
-custom_minimum_size = Vector2(620, 0)
+custom_minimum_size = Vector2(620, 420)
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
 
 [node name="Content" type="VBoxContainer" parent="CenterContainer/PanelContainer"]
@@ -78,8 +79,16 @@ theme_override_font_sizes/font_size = 16
 text = "Choose an upgrade"
 horizontal_alignment = 1
 
-[node name="ChoiceList" type="VBoxContainer" parent="CenterContainer/PanelContainer/Content"]
+[node name="ChoiceScroll" type="ScrollContainer" parent="CenterContainer/PanelContainer/Content"]
+process_mode = 3
+custom_minimum_size = Vector2(0, 350)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="ChoiceList" type="VBoxContainer" parent="CenterContainer/PanelContainer/Content/ChoiceScroll"]
 unique_name_in_owner = true
 process_mode = 3
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 10

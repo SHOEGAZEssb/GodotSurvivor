@@ -54,6 +54,11 @@ namespace GodotSurvivor.Scenes.Player
 		public string TargetName { get; }
 
 		/// <summary>
+		/// Collectible id of the item or weapon affected by this upgrade.
+		/// </summary>
+		public string TargetCollectibleId { get; }
+
+		/// <summary>
 		/// Optional texture path for the affected target.
 		/// </summary>
 		public string TargetTexturePath { get; }
@@ -89,13 +94,15 @@ namespace GodotSurvivor.Scenes.Player
 		/// Pass null if no check is needed.</param>
 		/// <param name="maxStacks">Maximum amount of times this upgrade can be chosen.</param>
 		/// <param name="targetTexturePath">Optional texture path for the affected target.</param>
-		public Upgrade(string id, string name, string description, UpgradeType type, string targetName, Action upgradeAction, Func<bool> isApplicable = null, int maxStacks = int.MaxValue, string targetTexturePath = null)
+		/// <param name="targetCollectibleId">Collectible id of the item or weapon affected by this upgrade.</param>
+		public Upgrade(string id, string name, string description, UpgradeType type, string targetName, Action upgradeAction, Func<bool> isApplicable = null, int maxStacks = int.MaxValue, string targetTexturePath = null, string targetCollectibleId = null)
 		{
 			Id = id;
 			Name = name;
 			Description = description;
 			Type = type;
 			TargetName = targetName;
+			TargetCollectibleId = targetCollectibleId;
 			TargetTexturePath = targetTexturePath;
 			_upgradeAction = upgradeAction;
 			_isApplicable = isApplicable;

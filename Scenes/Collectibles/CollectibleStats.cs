@@ -10,6 +10,7 @@ namespace GodotSurvivor.Scenes.Collectibles
 		public long EnemiesKilled { get; set; }
 		public long Experience { get; set; }
 		public int Level { get; set; } = 1;
+		public List<string> PickedUpgradeIds { get; set; } = new();
 		public Dictionary<string, long> CustomStats { get; set; } = new();
 
 		public long GetValue(string statKey)

@@ -48,6 +48,13 @@ namespace GodotSurvivor.Scenes.Collectibles
 					CollectibleStatKeys.EnemiesKilled,
 					CollectibleStatKeys.Experience,
 					CollectibleStatKeys.Level
+				},
+				new[]
+				{
+					new CollectibleUpgradeDefinition("magic_shield.attack_delay", "Attack Delay", "-10% Attack Delay"),
+					new CollectibleUpgradeDefinition("magic_shield.damage", "Damage", "+20% Damage"),
+					new CollectibleUpgradeDefinition("magic_shield.size", "Size", "+15% Size"),
+					new CollectibleUpgradeDefinition("magic_shield.burning", "Burning", "50% Chance to apply Burning", 1)
 				}),
 			new(
 				CollectibleIds.Sawblade,
@@ -62,6 +69,14 @@ namespace GodotSurvivor.Scenes.Collectibles
 					CollectibleStatKeys.EnemiesKilled,
 					CollectibleStatKeys.Experience,
 					CollectibleStatKeys.Level
+				},
+				new[]
+				{
+					new CollectibleUpgradeDefinition("sawblade.damage", "Damage", "+10% Damage"),
+					new CollectibleUpgradeDefinition("sawblade.amount", "Sawblade", "+1 Sawblade"),
+					new CollectibleUpgradeDefinition("sawblade.rotation_speed", "Rotation Speed", "+15% Rotation Speed"),
+					new CollectibleUpgradeDefinition("sawblade.size", "Size", "+10% Size"),
+					new CollectibleUpgradeDefinition("sawblade.divider", "Divider", "Low chance to split enemies in two", 1)
 				}),
 			new(
 				CollectibleIds.GlowingCoal,
@@ -90,6 +105,10 @@ namespace GodotSurvivor.Scenes.Collectibles
 					CollectibleStatKeys.TreasureDugUp,
 					CollectibleStatKeys.Experience,
 					CollectibleStatKeys.Level
+				},
+				new[]
+				{
+					new CollectibleUpgradeDefinition("shovel.slow", "Slow", "50% chance to apply Slow", 1)
 				})
 		};
 

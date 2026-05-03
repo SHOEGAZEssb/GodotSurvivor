@@ -10,6 +10,7 @@ namespace GodotSurvivor.Scenes.Collectibles
 		public string TexturePath { get; }
 		public CollectibleCategory Category { get; }
 		public IReadOnlyList<string> SupportedStats { get; }
+		public IReadOnlyList<CollectibleUpgradeDefinition> AvailableUpgrades { get; }
 
 		public CollectibleDefinition(
 			string id,
@@ -17,7 +18,8 @@ namespace GodotSurvivor.Scenes.Collectibles
 			string description,
 			string texturePath,
 			CollectibleCategory category,
-			IReadOnlyList<string> supportedStats)
+			IReadOnlyList<string> supportedStats,
+			IReadOnlyList<CollectibleUpgradeDefinition> availableUpgrades = null)
 		{
 			Id = id;
 			Name = name;
@@ -25,6 +27,7 @@ namespace GodotSurvivor.Scenes.Collectibles
 			TexturePath = texturePath;
 			Category = category;
 			SupportedStats = supportedStats;
+			AvailableUpgrades = availableUpgrades ?? new List<CollectibleUpgradeDefinition>();
 		}
 	}
 }
